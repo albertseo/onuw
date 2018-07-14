@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
 import styled, { injectGlobal } from "styled-components";
 
+import { Provider } from "react-redux";
+
 import Header from "./components/header";
 import Players from "./components/players";
 import Center from "./components/center";
-
 
 class App extends Component {
   constructor() {
@@ -33,11 +34,13 @@ class App extends Component {
     });
 
     return (
-      <MainWrapper>
-        <Header />
-        <Players />
-        <Center />
-      </MainWrapper>
+      <Provider store = {store}>
+        <MainWrapper>
+          <Header />
+          <Players />
+          <Center />
+        </MainWrapper>
+      </Provider>
     );
   }
 }
