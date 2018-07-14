@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
 import styled, { injectGlobal } from "styled-components";
 
-import { Provider } from "react-redux";
+import { connect, Provider } from "react-redux";
 
 import Header from "./components/header";
 import Players from "./components/players";
 import Center from "./components/center";
+import store from "./store.js"
 
 class App extends Component {
   constructor() {
