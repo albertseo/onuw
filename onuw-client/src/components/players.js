@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-export default class Players extends Component {
+class Players extends Component {
   render() {
     return (
       <PlayerWrapper>
         <Title>Players</Title>
         <Line />
         <PlayerListWrapper>
-          <PlayerDiv>Albert</PlayerDiv>
-          <PlayerDiv>Albert</PlayerDiv>
-          <PlayerDiv>Albert</PlayerDiv>
+          {this.props.players.map(player => {
+            return <PlayerDiv>{player}</PlayerDiv>;
+          })}
         </PlayerListWrapper>
       </PlayerWrapper>
     );
@@ -52,3 +53,9 @@ const PlayerDiv = styled.div`
     background-color: gray;
   }
 `;
+
+const mapStateToProps = state => ({
+  players: state.players
+});
+
+export default connect(mapStateToProps)(Players);

@@ -3,7 +3,8 @@ import rootReducer from "./reducers"
 
 // Creates the inital state of the store
 const initialState = {
-    gameState: "lobby"
+    gameState: "lobby",
+    players: ["Albert", "Jonathan", "Daniel"]
 };
 
 // Creates the store with the rootReducer and the initialState
