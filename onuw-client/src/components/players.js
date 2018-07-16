@@ -18,6 +18,14 @@ class Players extends Component {
   }
 }
 
+// The players component only needs the list of current players from the global state
+const mapStateToProps = state => ({
+  players: state.players
+});
+
+// Connect this component to the store
+export default connect(mapStateToProps)(Players);
+
 // Styles for subcomponents
 const PlayerWrapper = styled.div`
   justify-content: center;
@@ -53,9 +61,3 @@ const PlayerDiv = styled.div`
     background-color: gray;
   }
 `;
-
-const mapStateToProps = state => ({
-  players: state.players
-});
-
-export default connect(mapStateToProps)(Players);

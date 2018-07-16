@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
 import styled, { injectGlobal } from "styled-components";
 
-import { connect, Provider } from "react-redux";
+import { Provider } from "react-redux";
 
 import Header from "./components/header";
 import Players from "./components/players";
 import Center from "./components/center";
-import store from "./store.js"
+import store from "./store.js";
 
 class App extends Component {
   constructor() {
@@ -35,7 +35,7 @@ class App extends Component {
     });
 
     return (
-      <Provider store = {store}>
+      <Provider store={store}>
         <MainWrapper>
           <Header />
           <Players />
