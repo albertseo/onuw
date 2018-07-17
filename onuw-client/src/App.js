@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import { connect } from "react-redux";
 
 import Lobby from "./components/lobby";
+import Intro from "./components/intro";
 
 class App extends Component {
   constructor() {
@@ -31,10 +32,14 @@ class App extends Component {
     });
 
     // Load the view that matches the current state of the game
-    if (this.props.gameState === "lobby") {
-      return <Lobby />
-    } 
-    // TODO: Add default case as well as other game states
+    switch (this.props.gameState) {
+      case "Intro":
+        return <Intro />;
+      case "Lobby":
+        return <Lobby />;
+      default:
+        return <Lobby />;
+    }
   }
 }
 
@@ -42,4 +47,4 @@ const mapStateToProps = state => ({
   gameState: state.gameState
 });
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);

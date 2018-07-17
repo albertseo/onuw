@@ -4,7 +4,7 @@ import rootReducer from "./reducers";
 // Creates the inital state of the store
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
-  gameState: "lobby",
+  gameState: "Intro",
   players: ["Lorem", "Ipsum", "Dolor"]
 };
 

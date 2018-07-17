@@ -1,6 +1,6 @@
 import styled, { injectGlobal } from "styled-components";
 
-// Styled-Components for general components
+// Styled-Components for all general components
 const CenterComponentWrapper = styled.div`
   justify-content: center;
   margin-top: 1em;
@@ -36,16 +36,52 @@ const PlayerCard = styled.div`
   }
 `;
 
-const Link = styled.a `
-  color: #F7F7F7;
+const Link = styled.a`
+  color: #f7f7f7;
+`;
+
+// Styles for Header component
+// FOR: components/header.js
+const GameTitle = styled.p`
+  font-size: 2.25em;
+  color: #e5e5e5;
+  text-align: center;
+  margin-bottom: 0px;
+`;
+
+const HeaderWrapper = styled.div`
+  margin-botton: 5px;
+`;
+
+const TimeOfDay = styled.p`
+  font-size: 1.75em;
+  color: #e5e5e5;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0px;
 `;
 
 // Stlyes for Footer Component
 const FooterWrapper = styled.div`
   margin-top: 30px;
   text-align: center;
-  color: #F7F7F7;
-  font-size: .6em;
+  color: #f7f7f7;
+  font-size: 0.6em;
+`;
+
+// Styles for lobby.js
+const StartButton = styled.button`
+  background-color: #181E24;
+  color: #f7f7f7
+  border: 2px solid #f7f7f7;
+  border-radius: 2px;
+  font-size: 1.25em;
+  margin-top: 1em;
+`;
+
+const StartButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 // Style for Main Wrapper div
@@ -83,13 +119,18 @@ injectGlobal`
   }
 `;
 
-export { 
+export {
   CenterComponentWrapper,
+  GameTitle,
   Title,
-  Line, 
+  Line,
   PlayerCardWrapper,
   PlayerCard,
   Link,
   FooterWrapper,
+  StartButton,
+  StartButtonWrapper,
+  HeaderWrapper,
+  TimeOfDay,
   MainWrapper
 };
