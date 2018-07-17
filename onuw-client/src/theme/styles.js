@@ -36,11 +36,24 @@ const PlayerCard = styled.div`
   }
 `;
 
+const Link = styled.a `
+  color: #F7F7F7;
+`;
+
+// Stlyes for Footer Component
+const FooterWrapper = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  color: #F7F7F7;
+  font-size: .6em;
+`;
+
 // Style for Main Wrapper div
 const MainWrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
+  height: 100%;
 
   @media (min-width: 500px) {
     width: 500px;
@@ -76,5 +89,7 @@ export {
   Line, 
   PlayerCardWrapper,
   PlayerCard,
+  Link,
+  FooterWrapper,
   MainWrapper
 };

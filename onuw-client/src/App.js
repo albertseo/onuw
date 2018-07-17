@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
 
-import { Provider } from "react-redux";
+import { connect } from "react-redux";
 
-import Header from "./components/header";
-import Players from "./components/players";
-import Center from "./components/center";
-import store from "./store.js";
-
-import { MainWrapper } from "./theme/styles"
+import Lobby from "./components/lobby";
 
 class App extends Component {
   constructor() {
@@ -35,16 +30,16 @@ class App extends Component {
       document.body.style.backgroundColor = color;
     });
 
-    return (
-      <Provider store={store}>
-        <MainWrapper>
-          <Header />
-          <Players />
-          <Center />
-        </MainWrapper>
-      </Provider>
-    );
+    // Load the view that matches the current state of the game
+    if (this.props.gameState === "lobby") {
+      return <Lobby />
+    } 
+    // TODO: Add default case as well as other game states
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  gameState: state.gameState
+});
+
+export default connect(mapStateToProps)(App)
