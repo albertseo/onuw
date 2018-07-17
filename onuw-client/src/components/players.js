@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 
-import { PlayerWrapper, Title, Line, PlayerListWrapper, PlayerDiv } from "../theme/styles"
+import { CenterComponentWrapper, Title, Line, PlayerCardWrapper, PlayerCard } from "../theme/styles"
 
 class Players extends Component {
   render() {
     return (
-      <PlayerWrapper>
+      <CenterComponentWrapper>
         <Title>Players</Title>
         <Line />
-        <PlayerListWrapper>
+        <PlayerCardWrapper>
           {this.props.players.map(player => {
-            return <PlayerDiv>{player}</PlayerDiv>;
+            return <PlayerCard>{player}</PlayerCard>;
           })}
-        </PlayerListWrapper>
-      </PlayerWrapper>
+        </PlayerCardWrapper>
+      </CenterComponentWrapper>
     );
   }
 }

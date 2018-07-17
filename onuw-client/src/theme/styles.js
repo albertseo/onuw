@@ -1,7 +1,10 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { injectGlobal } from "styled-components";
 
 // Styled-Components for general components
+const CenterComponentWrapper = styled.div`
+  justify-content: center;
+  margin-top: 1em;
+`;
 
 const Title = styled.p`
   font-size: 1.4em;
@@ -15,17 +18,13 @@ const Line = styled.hr`
   height: 2px;
 `;
 
-// Styles Specific to players component
-const PlayerWrapper = styled.div`
-  justify-content: center;
-  margin-top: 1em;
-`;
-const PlayerListWrapper = styled.div`
+const PlayerCardWrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 `;
-const PlayerDiv = styled.div`
+
+const PlayerCard = styled.div`
   width: 45%;
   color: #f7f7f7;
   border-radius: 2px;
@@ -37,10 +36,45 @@ const PlayerDiv = styled.div`
   }
 `;
 
+// Style for Main Wrapper div
+const MainWrapper = styled.div`
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+
+  @media (min-width: 500px) {
+    width: 500px;
+  }
+  justify-content: center;
+  flex-direction: column;
+`;
+
+// Inject Directly into stylesheet for Raleway font
+injectGlobal`
+  @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+  * {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #181E24;
+    font-family: Raleway, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
 export { 
-  PlayerWrapper,
+  CenterComponentWrapper,
   Title,
   Line, 
-  PlayerListWrapper,
-  PlayerDiv
+  PlayerCardWrapper,
+  PlayerCard,
+  MainWrapper
 };
