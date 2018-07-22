@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Header from "./header";
 import Players from "./players";
-import Center from "./center";
 import Footer from "./footer";
 import { StartButton, StartButtonWrapper } from "../theme/styles";
 import { MainWrapper } from "../theme/styles";

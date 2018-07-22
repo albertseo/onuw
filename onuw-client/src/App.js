@@ -38,7 +38,7 @@ class App extends Component {
       case "Lobby":
         return <Lobby />;
       default:
-        return <Lobby />;
+        return <Intro />;
     }
   }
 }

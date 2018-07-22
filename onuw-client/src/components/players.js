@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { CenterComponentWrapper, Title, Line, PlayerCardWrapper, PlayerCard } from "../theme/styles"
+import {
+  CenterComponentWrapper,
+  Title,
+  Line,
+  PlayerCardWrapper,
+  PlayerCard
+} from "../theme/styles";
 
 class Players extends Component {
   render() {

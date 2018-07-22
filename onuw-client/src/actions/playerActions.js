@@ -1,17 +1,17 @@
-import { NEW_PLAYER } from "./types";
+import * as types from "./types";
 
-function fetchPlayers() {
+function newNamePost(playerName) {
+  return function (dispatch) {
+    console.log("newNamePost");
+    dispatch(newPlayer(playerName));
+  }
+}
+
+function newPlayer(playerName) {
   return {
-    type: FETCH_PLAYERS,
-    payload: "fetch"
+    type: types.NEW_NAME_POST,
+    payload: playerName
   };
 }
 
-function newPlayer(player) {
-  return {
-    type: NEW_PLAYER,
-    payload: player
-  };
-}
-
-export default { fetchPlayers, newPlayer };
+export default newNamePost;
