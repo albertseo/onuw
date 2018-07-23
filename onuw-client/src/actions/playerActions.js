@@ -9,7 +9,7 @@ function newNamePost(playerName) {
 
 function newPlayer(playerName) {
   return {
-    type: types.NEW_NAME_POST,
+    type: types.NEW_USERNAME,
     payload: playerName
   };
 }

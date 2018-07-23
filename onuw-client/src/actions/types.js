@@ -1,4 +1,7 @@
 // This file stores all of the actions types for redux
 
-// For playersReduce:
-export const NEW_NAME_POST = "NEW_NAME_POST";
+// For username:
+export const NEW_USERNAME = "NEW_USERNAME";
+
+// For gameState:
+export const NEW_GAMESTATE = "NEW_GAMESTATE";

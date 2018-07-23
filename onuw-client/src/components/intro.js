@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import newNamePost from "../actions/playerActions";
+import setGameState from "../actions/gameStateActions";
 
 import Header from "./header";
 import Footer from "./footer";
@@ -24,14 +25,17 @@ class Intro extends Component {
   }
 
   handleClick() {
+    // Should check for duplicate names as well
     if (this.state.textValue !== "") {
       this.props.newName(this.state.textValue);
+      this.props.gameState("Lobby");
     }
   }
 
   handleChange(e) {
     this.setState({textValue: e.target.value})
   }
+  
   render() {
     return (
       <MainWrapper>
@@ -49,7 +53,8 @@ class Intro extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    newName: (playerName) => dispatch(newNamePost(playerName))
+    newName: (playerName) => dispatch(newNamePost(playerName)),
+    gameState: (gameState) => dispatch(setGameState(gameState))
   };
 };
 
