@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
-import playerNameReducer from "./playerNameReducer";
+import usernameReducer from "./usernameReducer";
 import playersReducer from "./playersReducer";
+import gameStateReducer from "./gameStateReducer";
+import userRoleReducer from "./userRoleReducer";
 
 // This is the root reducer that gets passed into the constructo of createStore
 export default combineReducers({
   players: playersReducer,
-  playerName: playerNameReducer
+  username: usernameReducer,
+  gameState: gameStateReducer,
+  userRole: userRoleReducer
 });

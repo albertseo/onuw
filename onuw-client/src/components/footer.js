@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 
-import { FooterWrapper, Link } from "../theme/styles";
+import { FooterWrapper, LinkText, FlexCenter } from "../theme/styles";
 
 export default class Footer extends Component {
   render() {
     return (
       <FooterWrapper>
-        <div>
+        <FlexCenter>
           One Night Ultimate Werewolf desinged by Ted Alspach and Akisha Okui,
           published by &nbsp;
           <a href="https://beziergames.com/" target="_blanck">
-            <Link>Bezier Games</Link>
+            <LinkText>Bexier Games</LinkText>
           </a>.
-        </div>
+        </FlexCenter>
         <a href="https://github.com/albertseo/onuw" target="_blanck">
-          <Link>github.com/albertseo/onuw</Link>
+          <LinkText>github.com/albertseo/onuw</LinkText>
         </a>
       </FooterWrapper>
     );

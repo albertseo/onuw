@@ -36,9 +36,14 @@ const PlayerCard = styled.div`
   }
 `;
 
-const Link = styled.a`
+const Link = styled.p`
   color: #f7f7f7;
 `;
+
+const LinkText = styled.p`
+  color: #f7f7f7;
+  text-decoration: underline;
+`
 
 // Styles for Header component
 // FOR: components/header.js
@@ -69,6 +74,12 @@ const FooterWrapper = styled.div`
   text-align: center;
   color: #f7f7f7;
   font-size: 0.6em;
+`;
+
+const FlexCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 `;
 
 // Styles for lobby.js
@@ -167,7 +178,9 @@ export {
   PlayerCardWrapper,
   PlayerCard,
   Link,
+  LinkText,
   FooterWrapper,
+  FlexCenter,
   StartButton,
   StartButtonWrapper,
   HeaderWrapper,

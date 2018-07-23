@@ -5,8 +5,10 @@ import rootReducer from "./reducers";
 // Creates the inital state of the store
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
-  players: [],
-  playerName: ""
+  players: [], // The current players in the game
+  username: "", // The user's name
+  userRole: "", // The user's assigned role
+  gameState: "enterName", // Current state of the game, determines what view to show
 };
 
 // Creates the store with the rootReducer and the initialState
