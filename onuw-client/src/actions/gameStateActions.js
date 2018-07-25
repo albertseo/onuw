@@ -1,16 +1,16 @@
 import * as types from "./types";
 
-function setGameState(gameState) {
+function setPhaseState(gamePhase) {
   return function (dispatch) {
-    dispatch(newGameState(gameState));
+    dispatch(newPhaseState(gamePhase));
   }
 }
 
-function newGameState(gameState) {
+function newPhaseState(gamePhase) {
   return {
-    type: types.NEW_GAMESTATE,
-    payload: gameState
+    type: types.NEW_GAMEPHASE,
+    payload: gamePhase
   };
 }
 
-export default setGameState;
+export default setPhaseState;

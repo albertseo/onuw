@@ -4,4 +4,4 @@
 export const NEW_USERNAME = "NEW_USERNAME";
 
 // For gameState:
-export const NEW_GAMESTATE = "NEW_GAMESTATE";
+export const NEW_GAMEPHASE = "NEW_GAMEPHASE";

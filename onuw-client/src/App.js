@@ -32,7 +32,7 @@ class App extends Component {
     });
 
     // Load the view that matches the current state of the game
-    switch (this.props.gameState) {
+    switch (this.props.gamePhase) {
       case "Intro":
         return <Intro />;
       case "Lobby":
@@ -44,7 +44,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  gameState: state.gameState
+  gamePhase: state.gamePhase
 });
 
 export default connect(mapStateToProps)(App);

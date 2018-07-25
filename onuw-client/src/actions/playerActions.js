@@ -2,7 +2,6 @@ import * as types from "./types";
 
 function newNamePost(playerName) {
   return function (dispatch) {
-    console.log("newNamePost");
     dispatch(newPlayer(playerName));
   }
 }
