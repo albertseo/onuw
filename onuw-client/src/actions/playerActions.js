@@ -1,16 +1,31 @@
 import * as types from "./types";
 
-function newNamePost(playerName) {
+// Thunk action creators
+export function newNamePost(playerName) {
   return function (dispatch) {
-    dispatch(newPlayer(playerName));
+    dispatch(newUsername(playerName));
   }
 }
 
-function newPlayer(playerName) {
+export function newPlayerRole(playerName, playerRole) {
+  return function(dispatch) {
+    dispatch(addPlayer(playerName, playerRole));
+  }
+}
+
+// Regular action creators
+function newUsername(playerName) {
   return {
     type: types.NEW_USERNAME,
     payload: playerName
   };
 }
 
-export default newNamePost;
+function addPlayer(playerName, playerRole="") {
+  console.log(playerName);
+  return {
+    type: types.ADD_PLAYER,
+    payload: { name: [playerName], role: playerRole }
+  };
+}
+
