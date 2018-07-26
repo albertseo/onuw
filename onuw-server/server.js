@@ -12,6 +12,10 @@ var history = [];
 io.on("connection", socket => {
   console.log("client connected, id: ", socket.id);
 
+  socket.on("ADD_PLAYER", payload => {
+    console.log("adding new player");
+  });
+
   socket.on("colorChangeGlobal", color => {
       console.log('color changed to ', color);
       history.push(color);
@@ -21,7 +25,7 @@ io.on("connection", socket => {
   socket.on('getHistory', () => {
       console.log('get history');
       socket.emit('retHistory', history);
-  })
+  });
 
   socket.on("disconnect", () => {
     console.log("client disconnected, id: ", socket.id);

@@ -6,6 +6,6 @@ const messageTypes = [
   return accum
 }, {})
 
-const url = "//onuw-server.localhost:8000";
+const url = "//localhost:8000";
 
 module.exports{ messageTypes, url };

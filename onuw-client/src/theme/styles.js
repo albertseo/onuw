@@ -80,6 +80,7 @@ const FlexCenter = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  flex-flow: column;
 `;
 
 // Styles for lobby.js

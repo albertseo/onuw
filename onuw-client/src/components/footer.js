@@ -11,7 +11,7 @@ export default class Footer extends Component {
           published by &nbsp;
           <a href="https://beziergames.com/" target="_blanck">
             <LinkText>Bexier Games</LinkText>
-          </a>.
+          </a>
         </FlexCenter>
         <a href="https://github.com/albertseo/onuw" target="_blanck">
           <LinkText>github.com/albertseo/onuw</LinkText>

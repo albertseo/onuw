@@ -9,6 +9,9 @@ const init = store => {
   );
 };
 
-const emit = (type, payload) => socket.emit(type, payload);
+const emit = (type, payload) => {
+  console.log("sending");
+  socket.emit(type, payload);
+};
 
 export { init, emit };
