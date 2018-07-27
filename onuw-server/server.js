@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer();
 const io = socket(server);
 
-const types = require("./types.js");
+const types = require("./types.js").types;
 
 // import Game from "./game.js";
 const Game = require('./game.js');
@@ -17,7 +17,7 @@ io.on("connection", socket => {
 
   socket.on(types.ADD_PLAYER, payload => {
     game.addPlayer(payload.name, payload.role);
-    io.sockets.emit('UPDATE_PLAYERS', game.getPlayers());
+    io.sockets.emit(types.UPDATE_PLAYERS, game.getPlayers());
   });
 
   socket.on("disconnect", () => {
