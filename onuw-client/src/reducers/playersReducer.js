@@ -8,6 +8,8 @@ export default function playersReducer(state = {}, action) {
         ...state,
         [action.payload.name]: action.payload.role
       };
+    case types.UPDATE_PLAYERS:
+      return action.payload;
     default:
       return state;
   }

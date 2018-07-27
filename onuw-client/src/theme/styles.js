@@ -87,7 +87,7 @@ const FlexCenter = styled.div`
 // FOR: components/lobby.js
 const StartButton = styled.button`
   background-color: #181E24;
-  color: #f7f7f7
+  color: #f7f7f7;
   border: 2px solid #f7f7f7;
   border-radius: 2px;
   font-size: 1.25em;
@@ -133,7 +133,7 @@ const MainWrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  height: 100%:
+  height: 100%;
   width: 100%;
 
   @media (min-width: 500px) {

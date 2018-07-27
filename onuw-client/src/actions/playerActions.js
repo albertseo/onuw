@@ -7,11 +7,11 @@ export function newNamePost(playerName) {
   }
 }
 
-export function newPlayerRole(playerName, playerRole) {
+export function newPlayerRole(playerName, playerRole="") {
   return function(dispatch, getState, { emit }) {
     // Creates the store with the rootReducer and the initialState
     dispatch(addPlayer(playerName, playerRole));
-    emit("ADD_PLAYER", {name: [playerName], role: [playerRole]});
+    emit("ADD_PLAYER", {name: playerName, role: playerRole});
   }
 }
 

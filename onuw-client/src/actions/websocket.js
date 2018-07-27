@@ -10,7 +10,6 @@ const init = store => {
 };
 
 const emit = (type, payload) => {
-  console.log("sending");
   socket.emit(type, payload);
 };
 
