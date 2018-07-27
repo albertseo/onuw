@@ -15,9 +15,16 @@ const game = new Game();
 io.on("connection", socket => {
   console.log("client connected, id: ", socket.id);
 
+  // When client connects, add them to the game object and update all clients with new player
   socket.on(types.ADD_PLAYER, payload => {
     game.addPlayer(payload.name, payload.role);
     io.sockets.emit(types.UPDATE_PLAYERS, game.getPlayers());
+  });
+
+  // When the client advances gamephase, update server game and all clients with new gamePhase
+  socket.on(types.NEW_GAMEPHASE, payload => {
+    game.changeGamePhase(payload);
+    io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
   socket.on("disconnect", () => {
