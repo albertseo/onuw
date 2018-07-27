@@ -15,6 +15,9 @@ const baseSetRoles = [
       "Insomniac",
       "Minion",
       "Doppleganger"
-];
+].reduce((accum, msg) => {
+  accum[ msg ] = msg
+  return accum
+}, {});
 
 module.exports.roles = baseSetRoles;

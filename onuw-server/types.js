@@ -6,6 +6,9 @@ const ADD_PLAYER = "ADD_PLAYER";
 // For gameState:
 const NEW_GAMEPHASE = "NEW_GAMEPHASE";
 
+// For gameActions:
+const PLAYER_ACTION = "PLAYER_ACTION";
+
 // REMEMBER TO UPDATED TYPES IN CLIENT FOLDER AS WELL
 // Actions that will dispatch from server:
 const UPDATE_PLAYERS = "UPDATE_PLAYERS";
@@ -16,6 +19,8 @@ module.exports.types = {
   ADD_PLAYER,
 
   NEW_GAMEPHASE,
+
+  PLAYER_ACTION,
 
   UPDATE_PLAYERS,
   UPDATE_GAMEPHASE

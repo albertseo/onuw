@@ -26,7 +26,7 @@ class Game {
 
   // Get the role of a specific player
   getPlayersRole(playerName) {
-      return this.players[playerName];
+    return this.players[playerName];
   }
 
   // Adds a player to the players list
@@ -43,18 +43,64 @@ class Game {
   }
 
   // Execute the player's action depending on the player
-  playerAction(player, action) {
+  playerNightAction(player, action) {
     switch (player) {
+      case roles.Villager:
+        villagerAction(player, action);
+        break;
+      case roles.Werewolf:
+        werewolfAction(player, action);
+        break;
+      case roles.Seer:
+        seerAction(player, action);
+        break;
+      case roles.Robber:
+        robberAction(player, action);
+        break;
+      case roles.Troublemaker:
+        troublemakerAction(player, action);
+        break;
+      case roles.Tanner:
+        tannerAction(player, action);
+        break;
+      case roles.Drunk:
+        drunkAction(player, action);
+        break;
+      case roles.Hunter:
+        hunterAction(player, action);
+        break;
+      case roles.Mason:
+        masonAction(player, action);
+        break;
+      case roles.Insomniac:
+        insomniacAction(player, action);
+        break;
+      case roles.Minion:
+        minionAction(player, action);
+        break;
+      case roles.Doppleganger:
+        dopplegangerAction(player, action);
+        break;
       default:
-        return "";
+        return "Role not found";
     }
+  }
+
+  // The villager has no action during the night
+  villagerAction(player, action) {
+      return;
+  }
+
+  // Werewolf can either know who the other werewolfs are, or look at a center card
+  werewolfAction(player, action) {
+
   }
 
   // Swaps the roles of two players
   swapPlayersRole(player1, player2) {
-      let temp = this.players[player1];
-      this.players[player1] = this.players[player2];
-      this.players[player2] = temp;
+    let temp = this.players[player1];
+    this.players[player1] = this.players[player2];
+    this.players[player2] = temp;
   }
 }
 
