@@ -93,7 +93,7 @@ class Game {
 
   // Werewolf can either know who the other werewolfs are, or look at a center card
   werewolfAction(player, action) {
-
+    return;
   }
 
   // Swaps the roles of two players
