@@ -4,6 +4,7 @@ import styled, { injectGlobal } from "styled-components";
 const CenterComponentWrapper = styled.div`
   justify-content: center;
   margin-top: 1em;
+  width: 100%;
 `;
 
 const Title = styled.p`
@@ -27,9 +28,25 @@ const PlayerCardWrapper = styled.div`
 const PlayerCard = styled.div`
   width: 45%;
   color: #f7f7f7;
-  border-radius: 2px;
+  border-radius: 4px;
   display: flex;
   margin-top: 10px;
+  padding: 4px;
+  font-size: .95em;
+
+  &:hover {
+    background-color: gray;
+  }
+`;
+
+const PlayerCardSelected = styled.div`
+  width: 45%;
+  color: #65F135;
+  border-radius: 4px;
+  display: flex;
+  margin-top: 10px;
+  padding: 4px;
+  font-size: .95em;
 
   &:hover {
     background-color: gray;
@@ -56,7 +73,7 @@ const GameTitle = styled.p`
 `;
 
 const HeaderWrapper = styled.div`
-  margin-botton: 5px;
+  margin-bottom: 5px;
 `;
 
 const TimeOfDay = styled.p`
@@ -127,6 +144,17 @@ const NameTextWrapper = styled.div`
 const SpacerDiv = styled.div`
   height:  2em;
 `;
+
+// Styles for Night View div
+// FOR: components/night.js
+const RoleDisplay = styled.div`
+  display: flex;
+  color: #e5e5e5;
+  font-size: 1.5em;
+  margin-top: .75em;
+  font-weight: bold;
+`;
+
 // Style for Main Wrapper div
 // FOR: main view components, ie. Lobby, Intro
 const MainWrapper = styled.div`
@@ -142,6 +170,7 @@ const MainWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 // Inject Directly into stylesheet for Raleway font
@@ -178,6 +207,7 @@ export {
   Line,
   PlayerCardWrapper,
   PlayerCard,
+  PlayerCardSelected,
   Link,
   LinkText,
   FooterWrapper,
@@ -190,5 +220,6 @@ export {
   NameTextButton,
   NameTextWrapper,
   SpacerDiv,
+  RoleDisplay,
   MainWrapper
 };

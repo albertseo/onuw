@@ -27,6 +27,11 @@ io.on("connection", socket => {
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
+  // When the performs an action, update the server
+  socket.on(types.PLAYER_ACTION, payload => {
+    game.playerNightAction(payload.player, payload.action);
+  });
+
   socket.on("disconnect", () => {
     console.log("client disconnected, id: ", socket.id);
   });

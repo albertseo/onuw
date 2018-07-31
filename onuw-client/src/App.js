@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Lobby from "./components/lobby";
 import Intro from "./components/intro";
+import Night from "./components/night";
 
 class App extends Component {
   render() {
@@ -12,6 +13,8 @@ class App extends Component {
         return <Intro />;
       case "Lobby":
         return <Lobby />;
+      case "Night":
+        return <Night />;
       default:
         return <Intro />;
     }

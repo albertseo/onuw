@@ -15,6 +15,12 @@ export function newPlayerRole(playerName, playerRole="") {
   }
 }
 
+export function toggleSelect(playerName, isSelected) {
+  return function (dispatch, getState, { emit }) {
+    dispatch(setSelect(playerName, isSelected));
+  }
+}
+
 // Regular action creators
 function newUsername(playerName) {
   return {
@@ -30,3 +36,9 @@ function addPlayer(playerName, playerRole="") {
   };
 }
 
+function setSelect(playerName, isSelected) {
+  return {
+    type: types.TOGGLE_CARD,
+    payload: { name: playerName, select: isSelected}
+  };
+}

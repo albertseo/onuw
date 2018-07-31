@@ -7,9 +7,15 @@ import { init as websocketInit, emit } from "./actions/websocket";
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
   players: {}, // The current players in the game
-  username: "", // The user's name
-  userRole: "", // The user's assigned role
-  gamePhase: "enterName" // Current state of the game, determines what view to show
+  username: "temp", // The user's name
+  userRole: "temp", // The user's assigned role
+  userRoleDescription: "temp", // description of user's role
+  gamePhase: "Night", // Current state of the game, determines what view to show
+  centerCards: { // Center cards during the game
+    "Alpha": false,
+    "Beta": false,
+    "Gamma": false
+  }
 };
 
 const middleware = [thunk.withExtraArgument({ emit })];
