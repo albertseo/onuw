@@ -36,6 +36,7 @@ const PlayerCard = styled.div`
 
   &:hover {
     background-color: gray;
+    cursor: pointer;
   }
 `;
 
@@ -51,6 +52,7 @@ const PlayerCardSelected = styled.div`
 
   &:hover {
     background-color: gray;
+    cursor: pointer;
   }
 `;
 

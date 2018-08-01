@@ -1,4 +1,4 @@
-const roles = require("./roles.js").roles;
+const roles = require("./gameConsts.js").roles;
 // This is the master server copy of a game that is running
 class Game {
   constructor() {

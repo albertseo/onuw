@@ -8,13 +8,13 @@ class Header extends Component {
       <HeaderWrapper>
         <GameTitle>One Night Ultimate Werewolf</GameTitle>
         <Line />
-        <TimeOfDay>{this.props.gameState}</TimeOfDay>
+        <TimeOfDay>{this.props.gamePhase}</TimeOfDay>
       </HeaderWrapper>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  gameState: state.gameState
+  gamePhase: state.gamePhase
 })
 export default connect(mapStateToProps)(Header);
