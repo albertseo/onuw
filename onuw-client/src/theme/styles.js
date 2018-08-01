@@ -41,12 +41,13 @@ const PlayerCard = styled.div`
 
 const PlayerCardSelected = styled.div`
   width: 45%;
-  color: #65F135;
+  color: #f7f7f7;
   border-radius: 4px;
   display: flex;
   margin-top: 10px;
   padding: 4px;
   font-size: .95em;
+  background-color: #314559;
 
   &:hover {
     background-color: gray;

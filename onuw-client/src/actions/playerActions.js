@@ -2,23 +2,32 @@ import * as types from "./types";
 
 // Thunk action creators
 export function newNamePost(playerName) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(newUsername(playerName));
-  }
+  };
 }
 
-export function newPlayerRole(playerName, playerRole="") {
+export function newPlayerRole(playerName, playerRole = "") {
   return function(dispatch, getState, { emit }) {
     // Creates the store with the rootReducer and the initialState
     dispatch(addPlayer(playerName, playerRole));
-    emit("ADD_PLAYER", {name: playerName, role: playerRole});
-  }
+    emit("ADD_PLAYER", { name: playerName, role: playerRole });
+  };
 }
 
 export function toggleSelect(playerName, isSelected) {
-  return function (dispatch, getState, { emit }) {
-    dispatch(setSelect(playerName, isSelected));
-  }
+  return function(dispatch, getState, { emit }) {
+    // Toggles the status of a player/card
+    if (!isSelected && getState().numSelectMax > 0) {
+      // Currently not selected, check if can select more
+      dispatch(setSelect(playerName, isSelected));
+      dispatch(subSelect());
+    } else if (isSelected) {
+      // Currently selected, can always deselect
+      dispatch(setSelect(playerName, isSelected));
+      dispatch(addSelect());
+    }
+  };
 }
 
 // Regular action creators
@@ -29,7 +38,7 @@ function newUsername(playerName) {
   };
 }
 
-function addPlayer(playerName, playerRole="") {
+function addPlayer(playerName, playerRole = "") {
   return {
     type: types.ADD_PLAYER,
     payload: { name: [playerName], role: playerRole }
@@ -39,6 +48,20 @@ function addPlayer(playerName, playerRole="") {
 function setSelect(playerName, isSelected) {
   return {
     type: types.TOGGLE_CARD,
-    payload: { name: playerName, select: isSelected}
+    payload: { name: playerName, select: isSelected }
+  };
+}
+
+function addSelect() {
+  return {
+    type: types.SELECT_ADD,
+    payload: null
+  };
+}
+
+function subSelect() {
+  return {
+    type: types.SELECT_SUB,
+    payload: null
   };
 }

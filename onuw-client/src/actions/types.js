@@ -10,6 +10,8 @@ export const NEW_GAMEPHASE = "NEW_GAMEPHASE";
 // For gameActions:
 export const PLAYER_ACTION = "PLAYER_ACTION";
 export const TOGGLE_CARD = "TOGGLE_CARD";
+export const SELECT_SUB = "SELECT_SUB";
+export const SELECT_ADD = "SELECT_ADD";
 
 // Actions that will dispatch from server:
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";

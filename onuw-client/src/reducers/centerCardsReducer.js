@@ -4,7 +4,6 @@ import * as types from "../actions/types";
 export default function centerCardsReducer(state = {}, action) {
   switch (action.type) {
     case types.TOGGLE_CARD:
-    console.log(action);
       return {
         ...state,
         [action.payload.name]: !action.payload.select

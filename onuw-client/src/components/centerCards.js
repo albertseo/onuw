@@ -19,7 +19,6 @@ class CenterCards extends Component {
   }
 
   handleSelect(e) {
-    console.log("clicked");
     let player = e.target.textContent;
     this.props.toggle(player, this.props.center[player]);
   }

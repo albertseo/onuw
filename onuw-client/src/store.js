@@ -15,7 +15,8 @@ const initialState = {
     "Alpha": false,
     "Beta": false,
     "Gamma": false
-  }
+  },
+  numSelectMax: 1
 };
 
 const middleware = [thunk.withExtraArgument({ emit })];
