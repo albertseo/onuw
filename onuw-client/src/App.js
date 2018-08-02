@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Lobby from "./components/lobby";
 import Intro from "./components/intro";
 import Night from "./components/night";
+import RoleSelect from "./components/roleSelect";
 
 class App extends Component {
   render() {
@@ -13,6 +14,8 @@ class App extends Component {
         return <Intro />;
       case "Lobby":
         return <Lobby />;
+      case "Pick Roles":
+        return <RoleSelect/>;
       case "Night":
         return <Night />;
       default:

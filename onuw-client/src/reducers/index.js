@@ -6,6 +6,8 @@ import userRoleReducer from "./userRoleReducer";
 import userRoleDescriptionReduer from "./userRoleDescriptionReducer";
 import centerCardsReducer from "./centerCardsReducer";
 import numSelectMaxReducer from "./numSelectMaxReducer";
+import allRolesReducer from "./allRolesReducer";
+import currentRolesReducer from "./currentRolesReducer";
 
 // This is the root reducer that gets passed into the constructo of createStore
 export default combineReducers({
@@ -15,5 +17,7 @@ export default combineReducers({
   userRoleDescription: userRoleDescriptionReduer,
   gamePhase: gamePhaseReducer,
   centerCards: centerCardsReducer,
-  numSelectMax: numSelectMaxReducer
+  numSelectMax: numSelectMaxReducer,
+  allRoles: allRolesReducer,
+  currentRoles: currentRolesReducer
 });

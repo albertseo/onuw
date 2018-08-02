@@ -2,18 +2,18 @@
 
 // All of the roles that are available in the base set
 const baseSetRoles = [
-      "Villager",
-      "Villager",
-      "Werewolf",
-      "Werewolf",
+      "Villager 1",
+      "Villager 2",
+      "Werewolf 1",
+      "Werewolf 2",
       "Seer",
       "Robber",
       "Troublemaker",
       "Tanner",
       "Drunk",
       "Hunter",
-      "Mason",
-      "Mason",
+      "Mason 1",
+      "Mason 2",
       "Insomniac",
       "Minion",
       "Doppleganger"
@@ -23,7 +23,7 @@ const baseSetRoles = [
 }, {});
 
 // Role descriptions
-const villagerDescription = "You are just a normal villager";
+const villagerDescription = "You are just villager, you do not have a night role";
 const werewolfDescription = "The other werewolves are ";
 const loneWerewolfDescription = "Pick a center card to reveal";
 const seerDescription = "You may look at another person's card, or two of the center cards";

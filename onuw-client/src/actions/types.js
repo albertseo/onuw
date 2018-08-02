@@ -17,6 +17,10 @@ export const SELECT_ADD = "SELECT_ADD";
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
 export const UPDATE_GAMEPHASE = "UPDATE_GAMEPHASE";
 export const UPDATE_ROLE = "UPDATE_ROLE";
+export const ROLE_TOGGLE = "ROLE_TOGGLE";
+export const ROLE_ADD = "ROLE_ADD";
+export const ROLE_SUB = "ROLE_SUB";
+export const UPDATE_GAME_ROLES = "UPDATE_GAME_ROLES";
 
 // For communicating with the server, there are the actions the client listens for
 // makes an object of the form {userNew: 'userNew'}
@@ -24,6 +28,7 @@ export const messageTypes = [
   UPDATE_PLAYERS,
   UPDATE_GAMEPHASE,
   UPDATE_ROLE,
+  UPDATE_GAME_ROLES
 ].reduce((accum, msg) => {
   accum[ msg ] = msg
   return accum
