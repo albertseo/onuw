@@ -14,13 +14,40 @@ import {
 class Roles extends Component {
   constructor() {
     super();
+    this.state = {
+      numberOfSelectableRoles: 0
+    };
 
     this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleSelect(e) {
     let role = e.target.textContent;
-    this.props.toggle(role, this.props.roles[role]);
+    let selected = this.props.roles[role];
+    this.handleToggle(role, selected);
+  }
+
+  handleToggle(role, selected) {
+    if (selected) {
+      // If already selected, then can deselect whenever
+      this.props.toggle(role, selected);
+      this.setState({
+        numberOfSelectableRoles: this.state.numberOfSelectableRoles + 1
+      });
+    } else if (!selected && this.state.numberOfSelectableRoles > 0) {
+      // else if there's still room to select one more
+      this.props.toggle(role, selected);
+      this.setState({
+        numberOfSelectableRoles: this.state.numberOfSelectableRoles - 1
+      });
+    }
+  }
+
+  componentWillMount() {
+    // Should get an updated version of roles when it mounts
+    this.setState({
+      numberOfSelectableRoles: Object.keys(this.props.playersList).length + 3
+    });
   }
 
   render() {
@@ -52,6 +79,7 @@ class Roles extends Component {
 
 // The players component only needs the list of current players from the global state
 const mapStateToProps = state => ({
+  playersList: state.players,
   roles: state.allRoles
 });
 

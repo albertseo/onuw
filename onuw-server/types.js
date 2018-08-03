@@ -20,6 +20,7 @@ const UPDATE_ROLE = "UPDATE_ROLE";
 const ROLE_TOGGLE = "ROLE_TOGGLE";
 const ROLE_ADD = "ROLE_ADD";
 const ROLE_SUB = "ROLE_SUB";
+const UPDATE_ALL_ROLES = "UPDATE_ALL_ROLES";
 const UPDATE_GAME_ROLES = "UPDATE_GAME_ROLES";
 
 module.exports.types = {
@@ -39,5 +40,6 @@ module.exports.types = {
   ROLE_TOGGLE,
   ROLE_ADD,
   ROLE_SUB,
+  UPDATE_ALL_ROLES,
   UPDATE_GAME_ROLES
 }

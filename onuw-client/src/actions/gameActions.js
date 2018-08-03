@@ -2,17 +2,9 @@ import * as types from "./types";
 
 export function toggleRole(roleName, isSelected) {
   return function(dispatch, getState, { emit }) {
+      // Check for number of selected is handled at the component level
       dispatch(togglingRole(roleName, isSelected));
-    // Toggles the status of a player/card
-    // if (!isSelected && getState().numSelectMax > 0) {
-      // Currently not selected, check if can select more
-      // dispatch(togglingRole(playerName, isSelected));
-    //   dispatch(subRole());
-    // } else if (isSelected) {
-      // Currently selected, can always deselect
-      // dispatch(togglingRole(playerName, isSelected));
-    //   dispatch(addRole());
-    // }
+      emit(types.ROLE_TOGGLE, {role: roleName, select: isSelected});
   };
 }
 

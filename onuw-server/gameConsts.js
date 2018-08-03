@@ -18,7 +18,7 @@ const baseSetRoles = [
       "Minion",
       "Doppleganger"
 ].reduce((accum, msg) => {
-  accum[ msg ] = msg
+  accum[ msg ] = false
   return accum
 }, {});
 

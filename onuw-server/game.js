@@ -24,6 +24,11 @@ class Game {
     return this.currentRoles;
   }
 
+  // Gets all roles
+  getAllRoles() {
+    return this.allRoles;
+  }
+
   // Get the role of a specific player
   getPlayersRole(playerName) {
     return this.players[playerName];
@@ -40,6 +45,10 @@ class Game {
   // Changes the gamePhase
   changeGamePhase(newPhase) {
     this.gamePhase = newPhase;
+  }
+
+  roleToggle(payload) {
+    this.allRoles[payload.role] = !payload.select;
   }
 
   // Execute the player's action depending on the player

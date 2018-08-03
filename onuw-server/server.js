@@ -27,6 +27,11 @@ io.on("connection", socket => {
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
+  socket.on(types.ROLE_TOGGLE, payload => {
+    game.roleToggle(payload);
+    io.sockets.emit(types.UPDATE_ALL_ROLES, game.getAllRoles());
+  });
+
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
     game.playerNightAction(payload.player, payload.action);

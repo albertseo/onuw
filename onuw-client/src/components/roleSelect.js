@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 
 import Header from "./header";
 import Footer from "./footer";
-import Players from "./players";
 import Roles from "./roles";
-import { MainWrapper, RoleDisplay } from "../theme/styles";
+import { MainWrapper } from "../theme/styles";
 
 class RoleSelect extends Component {
   render() {
@@ -19,9 +18,5 @@ class RoleSelect extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  userRole: state.userRole,
-  userRoleDescription: state.userRoleDescription
-});
 
-export default connect(mapStateToProps)(RoleSelect);
+export default connect(null)(RoleSelect);

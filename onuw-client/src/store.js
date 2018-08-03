@@ -7,7 +7,11 @@ import { baseSetRoles } from "./gameConstants";
 // Creates the inital state of the store
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
-  players: {}, // The current players in the game
+  players: {
+    "Alpha": false,
+    "Beta": false,
+    "Gamma": false
+  }, // The current players in the game
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
   userRoleDescription: "temp", // description of user's role
@@ -17,7 +21,7 @@ const initialState = {
     "Beta": false,
     "Gamma": false
   },
-  numSelectMax: 1, // How many cards that can be selected at once
+  nightSelectNum: 1, // How many cards that can be selected at once
   allRoles: baseSetRoles, // All the roles that are available to pick from, and which are selected
   currentRoles: {} // All of the roles that are in the current game
 };

@@ -1,13 +1,14 @@
 import * as types from "../actions/types";
 
-// This takes in an action and returns the correct state
 export default function allRolesReducer (state = {}, action) {
   switch (action.type) {
-    case types.ROLE_TOGGLE:
+    case types.ROLE_TOGGLE: // Toggles a role from selected to unselected
       return {
         ...state,
         [action.payload.role]: !action.payload.select
       };
+    case types.UPDATE_ALL_ROLES:
+      return action.payload;
     default:
       return state;
   }
