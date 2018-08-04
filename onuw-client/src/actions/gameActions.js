@@ -8,6 +8,34 @@ export function toggleRole(roleName, isSelected) {
   };
 }
 
+export function majorityNumAdd() {
+  return function(dispatch, getState, { emit }) {
+    dispatch(majAdd());
+    emit(types.MAJORITY_ADD, null);
+  }
+}
+
+export function majorityNumSub() {
+  return function(dispatch, getState, { emit }) {
+    dispatch(majSub());
+    emit(types.MAJORITY_SUB, null);
+  }
+}
+
+function majAdd() {
+  return {
+    type: types.MAJORITY_ADD,
+    payload: null
+  }
+}
+
+function majSub() {
+  return {
+    type: types.MAJORITY_ADD,
+    payload: null
+  }
+}
+
 function togglingRole(roleName, isSelected) {
   return {
     type: types.ROLE_TOGGLE,

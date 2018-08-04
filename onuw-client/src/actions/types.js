@@ -20,6 +20,10 @@ export const UPDATE_ROLE = "UPDATE_ROLE";
 export const ROLE_TOGGLE = "ROLE_TOGGLE";
 export const ROLE_ADD = "ROLE_ADD";
 export const ROLE_SUB = "ROLE_SUB";
+export const MAJORITY_ADD = "MAJORITY_ADD";
+export const MAJORITY_SUB = "MAJORITY_SUB";
+export const UPDATE_MAJORITY_READY = "UPDATE_MAJORITU_READY";
+export const UPDATE_MAJORITY = "UPDATE_MAJORITY";
 export const UPDATE_ALL_ROLES = "UPDATE_ALL_ROLES";
 export const UPDATE_GAME_ROLES = "UPDATE_GAME_ROLES";
 
@@ -29,6 +33,8 @@ export const messageTypes = [
   UPDATE_PLAYERS,
   UPDATE_GAMEPHASE,
   UPDATE_ROLE,
+  UPDATE_MAJORITY,
+  UPDATE_MAJORITY_READY,
   UPDATE_ALL_ROLES,
   UPDATE_GAME_ROLES
 ].reduce((accum, msg) => {

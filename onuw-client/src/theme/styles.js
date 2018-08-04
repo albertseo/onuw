@@ -125,6 +125,15 @@ const StartButton = styled.button`
   cursor: pointer;
 `;
 
+const StartButtonPressed = styled.button`
+  background-color: gray;
+  color: #f7f7f7;
+  border: 2px solid gray;
+  border-radius: 4px;
+  font-size: 1.25em;
+  margin-top: 1em;
+`;
+
 const StartButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -227,6 +236,7 @@ export {
   FooterWrapper,
   FlexCenter,
   StartButton,
+  StartButtonPressed,
   StartButtonWrapper,
   HeaderWrapper,
   TimeOfDay,

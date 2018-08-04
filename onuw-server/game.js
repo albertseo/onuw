@@ -7,11 +7,16 @@ class Game {
     this.gamePhase = "enterName"; // Current state of the game, determines what view to show
     this.currentRoles = []; // The roles that are in the current game
     this.allRoles = roles; // All of the roles that are available in the game
+    this.majorityNum = 0 // Number used to confirm everyone
   }
 
   // Gets the list of players
   getPlayers() {
     return this.players;
+  }
+
+  getNumPlayers() {
+    return Object.keys(this.players).length;
   }
 
   // Gets the current game phase
@@ -29,9 +34,16 @@ class Game {
     return this.allRoles;
   }
 
+  getMajorityNum() {
+    return this.majorityNum;
+  }
   // Get the role of a specific player
   getPlayersRole(playerName) {
     return this.players[playerName];
+  }
+
+  setMajorityNum(num) {
+    this.majorityNum = num;
   }
 
   // Adds a player to the players list

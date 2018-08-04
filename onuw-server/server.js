@@ -27,6 +27,14 @@ io.on("connection", socket => {
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
+  socket.on(types.MAJORITY_ADD, payload => {
+    game.setMajorityNum(game.getMajorityNum() + 1);
+    io.sockets.emit(types.UPDATE_MAJORITY, game.getMajorityNum());
+    if (game.getMajorityNum() >= game.getNumPlayers()) {
+      io.sockets.emit(types.UPDATE_MAJORITY_READY, true);
+    }
+  });
+
   socket.on(types.ROLE_TOGGLE, payload => {
     game.roleToggle(payload);
     io.sockets.emit(types.UPDATE_ALL_ROLES, game.getAllRoles());
