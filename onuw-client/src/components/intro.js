@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { newNamePost, newPlayerRole} from "../actions/playerActions";
-import setPhaseState from "../actions/gameStateActions";
+import { setPhaseState } from "../actions/gameStateActions";
 
 import Header from "./header";
 import Footer from "./footer";

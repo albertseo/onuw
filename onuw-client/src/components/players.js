@@ -17,7 +17,7 @@ class Players extends Component {
         <Line />
         <PlayerCardWrapper>
           {Object.keys(this.props.players).map(player => {
-            return <PlayerCard>{player}</PlayerCard>;
+            return <PlayerCard key={player}>{player}</PlayerCard>;
           })}
         </PlayerCardWrapper>
       </CenterComponentWrapper>

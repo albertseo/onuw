@@ -15,7 +15,7 @@ const initialState = {
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
   userRoleDescription: "temp", // description of user's role
-  gamePhase: "Pick Roles", // Current state of the game, determines what view to show
+  gamePhase: "Lobby", // Current state of the game, determines what view to show
   centerCards: { // Center cards during the game
     "Alpha": false,
     "Beta": false,

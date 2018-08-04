@@ -14,17 +14,3 @@ function togglingRole(roleName, isSelected) {
     payload: { role: roleName, select: isSelected }
   };
 }
-
-function addRole() {
-    return {
-        type: types.ROLE_ADD,
-        payload: null
-    }
-}
-
-function subRole() {
-    return {
-        type: types.ROLE_SUB,
-        payload: null
-    }
-}

@@ -26,7 +26,7 @@ const PlayerCardWrapper = styled.div`
 `;
 
 const PlayerCard = styled.div`
-  width: 45%;
+  width: 48%;
   color: #f7f7f7;
   border-radius: 4px;
   display: flex;
@@ -41,7 +41,7 @@ const PlayerCard = styled.div`
 `;
 
 const PlayerCardSelected = styled.div`
-  width: 45%;
+  width: 48%;
   color: #f7f7f7;
   border-radius: 4px;
   display: flex;
@@ -63,6 +63,16 @@ const Link = styled.p`
 const LinkText = styled.p`
   color: #f7f7f7;
   text-decoration: underline;
+`
+
+const ConfirmButton = styled.button`
+  background-color: #f7f7f7;
+  color: gray;
+  font-size: 1.2em;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
 `
 
 // Styles for Header component
@@ -109,7 +119,7 @@ const StartButton = styled.button`
   background-color: #181E24;
   color: #f7f7f7;
   border: 2px solid #f7f7f7;
-  border-radius: 2px;
+  border-radius: 4px;
   font-size: 1.25em;
   margin-top: 1em;
   cursor: pointer;
@@ -213,6 +223,7 @@ export {
   PlayerCardSelected,
   Link,
   LinkText,
+  ConfirmButton,
   FooterWrapper,
   FlexCenter,
   StartButton,
