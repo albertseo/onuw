@@ -10,6 +10,7 @@ import majorityNumReducer from "./majorityNumReducer";
 import allRolesReducer from "./allRolesReducer";
 import currentRolesReducer from "./currentRolesReducer";
 import majorityReadyReducer from "./majorityReadyReducer";
+import numRoleSelectedReducer from "./numRoleSelectedReducer";
 
 // This is the root reducer that gets passed into the constructo of createStore
 export default combineReducers({
@@ -23,5 +24,6 @@ export default combineReducers({
   majorityNum: majorityNumReducer,
   majorityReady: majorityReadyReducer,
   allRoles: allRolesReducer,
-  currentRoles: currentRolesReducer
+  currentRoles: currentRolesReducer,
+  numRoleSelected: numRoleSelectedReducer,
 });

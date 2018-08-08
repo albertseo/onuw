@@ -34,16 +34,16 @@ class RoleSelect extends Component {
           Confirmed - {this.props.majNum}/{this.props.numPlayers}
         </StartButtonPressed>
       );
-    } else if (this.state.readyToConfirm) {
+    } else if (this.props.playersNum + 3 - this.props.numRoleSelected <= 0) {
       button = (
         <StartButton onClick={this.handleConfirm}>
-          Confirm - {this.props.majNum}/{this.props.numPlayers}
+          Confirm - {this.props.majNum}/{this.props.playersNum}
         </StartButton>
       );
     } else if (!this.state.readyToConfirm) {
       button = (
         <StartButton>
-          need - {this.props.numRoles}
+          Select {this.props.playersNum + 3 - this.props.numRoleSelected} More Roles to Continue
         </StartButton>
       );
     }
@@ -64,7 +64,8 @@ const mapStateToProps = state => ({
   majNum: state.majorityNum,
   ready: state.majorityReady,
   players: state.players,
-  numRoles: Object.keys(state.players).length,
+  playersNum: Object.keys(state.players).length,
+  numRoleSelected: state.numRoleSelected,
 });
 
 const mapDispatchToProps = dispatch => {

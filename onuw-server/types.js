@@ -12,6 +12,9 @@ const TOGGLE_CARD = "TOGGLE_CARD";
 const SELECT_SUB = "SELECT_SUB";
 const SELECT_ADD = "SELECT_ADD";
 
+// For roleSelect:
+const NUMROLESELECTED = "NUMROLESELECTED"
+
 // REMEMBER TO UPDATED TYPES IN CLIENT FOLDER AS WELL
 // Actions that will dispatch from server:
 const UPDATE_PLAYERS = "UPDATE_PLAYERS";
@@ -38,6 +41,8 @@ module.exports.types = {
   TOGGLE_CARD,
   SELECT_SUB,
   SELECT_ADD,
+
+  NUMROLESELECTED,
 
   UPDATE_PLAYERS,
   UPDATE_GAMEPHASE,

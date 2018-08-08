@@ -7,6 +7,10 @@ export const ADD_PLAYER = "ADD_PLAYER";
 // For gameState:
 export const NEW_GAMEPHASE = "NEW_GAMEPHASE";
 
+// For roleSelect:
+export const ROLESELECT_NUMSELECTADD = "ROLESELECT_NUMSELECTADD";
+export const ROLESELECT_NUMSELECTSUB = "ROLESELECT_NUMSELECTSUB";
+
 // For gameActions:
 export const PLAYER_ACTION = "PLAYER_ACTION";
 export const TOGGLE_CARD = "TOGGLE_CARD";

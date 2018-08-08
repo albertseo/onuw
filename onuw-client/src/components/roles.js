@@ -28,6 +28,7 @@ class Roles extends Component {
   }
 
   handleToggle(role, selected) {
+    console.log(this.state.numberOfSelectableRoles);
     if (selected) {
       // If already selected, then can deselect whenever
       this.props.toggle(role, selected);
@@ -48,6 +49,9 @@ class Roles extends Component {
     this.setState({
       numberOfSelectableRoles: Object.keys(this.props.playersList).length + 3
     });
+    console.log(this.props.playersList);
+    console.log(this.state.numberOfSelectableRoles);
+
   }
 
   render() {

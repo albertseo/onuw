@@ -25,7 +25,9 @@ const initialState = {
   majorityNum: 0, // Number to count if everyone is ready
   majorityReady: false, // Only true when everyone ready to move on
   allRoles: baseSetRoles, // All the roles that are available to pick from, and which are selected
-  currentRoles: {} // All of the roles that are in the current game
+  currentRoles: {}, // All of the roles that are in the current game
+  
+  numRoleSelected: 0, // Number of roles that need to be selected 
 };
 
 const middleware = [thunk.withExtraArgument({ emit })];
