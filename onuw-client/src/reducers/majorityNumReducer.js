@@ -8,6 +8,8 @@ export default function majorityNumReducer(state = {}, action) {
             return state - 1;
         case types.UPDATE_MAJORITY:
             return action.payload;
+        case types.MAJORITY_RESET:
+            return 0;
         default:
             return state;
     }

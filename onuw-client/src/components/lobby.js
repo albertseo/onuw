@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setPhaseState } from "../actions/gameStateActions";
-import { majorityNumAdd, majorityNumSub } from "../actions/gameActions";
+import { majorityNumAdd, majorityNumSub, majorityReset } from "../actions/gameActions";
 
 import Header from "./header";
 import Players from "./players";
@@ -23,10 +23,10 @@ class Lobby extends Component {
 
   handleStart() {
     this.props.setPhase("Pick Roles", true);
+    this.props.majReset();
   }
 
   handleConfirm() {
-    //Dispatch to server here
     this.props.majAdd();
     this.setState({
       pressed: true
@@ -41,14 +41,15 @@ class Lobby extends Component {
     } else if (this.state.pressed) {
       button = (
         <StartButtonPressed>
-          Confirmed - {this.props.majNum}/3
+          Confirmed - {this.props.majNum}/{this.props.numPlayers}
         </StartButtonPressed>
       );
     } else if (!this.props.ready && !this.state.pressed) {
       button = (
-        <StartButton onClick={this.handleConfirm}>Confirm - {this.props.majNum}/3</StartButton>
+        <StartButton onClick={this.handleConfirm}>Confirm - {this.props.majNum}/{this.props.numPlayers}</StartButton>
       );
     }
+
 
     return (
       <MainWrapper>
@@ -71,7 +72,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     setPhase: gamePhase => dispatch(setPhaseState(gamePhase, true)),
-    majAdd: () => dispatch(majorityNumAdd())
+    majAdd: () => dispatch(majorityNumAdd()),
+    majReset: () => dispatch(majorityReset())
   };
 };
 

@@ -22,6 +22,13 @@ export function majorityNumSub() {
   }
 }
 
+export function majorityReset() {
+  return function (dispatch, getState, { emit }) {
+    dispatch(majReset());
+    emit(types.MAJORITY_RESET, null);
+  }
+}
+
 function majAdd() {
   return {
     type: types.MAJORITY_ADD,
@@ -32,6 +39,13 @@ function majAdd() {
 function majSub() {
   return {
     type: types.MAJORITY_ADD,
+    payload: null
+  }
+}
+
+function majReset() {
+  return {
+    type: types.MAJORITY_RESET,
     payload: null
   }
 }
