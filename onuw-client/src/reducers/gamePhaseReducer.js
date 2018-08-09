@@ -1,6 +1,6 @@
 import * as types from "../actions/types";
 
-// This takes in an action and returns the correct state
+// Reducer that updates gameState
 export default function gameStateReducer (state = {}, action) {
   switch (action.type) {
     case types.NEW_GAMEPHASE:

@@ -24,6 +24,9 @@ io.on("connection", socket => {
   // When the client advances gamephase, update server game and all clients with new gamePhase
   socket.on(types.NEW_GAMEPHASE, payload => {
     game.changeGamePhase(payload);
+    if (payload === "Night") {
+      game.generateRoles(); // Generate roles for each player
+    }
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 

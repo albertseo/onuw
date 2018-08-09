@@ -15,6 +15,7 @@ class Game {
     return this.players;
   }
 
+  // Gets the number of players
   getNumPlayers() {
     return Object.keys(this.players).length;
   }
@@ -34,9 +35,11 @@ class Game {
     return this.allRoles;
   }
 
+  // Gets the current number of clients confirmed for an action
   getMajorityNum() {
     return this.majorityNum;
   }
+
   // Get the role of a specific player
   getPlayersRole(playerName) {
     return this.players[playerName];
@@ -59,6 +62,7 @@ class Game {
     this.gamePhase = newPhase;
   }
 
+  // Toggle if a role is selected for the game
   roleToggle(payload) {
     this.allRoles[payload.role] = !payload.select;
   }
