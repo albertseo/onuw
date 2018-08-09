@@ -8,14 +8,14 @@ import { baseSetRoles } from "./gameConstants";
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
   players: {
-    "Alpha": false,
-    "Beta": false,
-    "Gamma": false
+    // "Alpha": false,
+    // "Beta": false,
+    // "Gamma": false
   }, // The current players in the game
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
   userRoleDescription: "temp", // description of user's role
-  gamePhase: "Pick Roles", // Current state of the game, determines what view to show
+  gamePhase: "Intro", // Current state of the game, determines what view to show
   centerCards: { // Center cards during the game
     "Alpha": false,
     "Beta": false,

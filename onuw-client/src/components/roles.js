@@ -24,7 +24,6 @@ class Roles extends Component {
   }
 
   handleToggle(role, selected) {
-    console.log(this.props.numRolesToSelect);
     if (selected) {
       // If already selected, then can deselect whenever
       this.props.toggle(role, selected);

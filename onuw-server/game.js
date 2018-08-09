@@ -4,7 +4,7 @@ class Game {
   constructor() {
     // Sets up the game object with the same initial state as the client
     this.players = {}; // The current players in the game
-    this.gamePhase = "enterName"; // Current state of the game, determines what view to show
+    this.gamePhase = "Intro"; // Current state of the game, determines what view to show
     this.currentRoles = []; // The roles that are in the current game
     this.allRoles = roles; // All of the roles that are available in the game
     this.majorityNum = 0 // Number used to confirm everyone

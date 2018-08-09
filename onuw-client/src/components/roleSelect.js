@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { setPhaseState } from "../actions/gameStateActions";
+import { majorityNumAdd, majorityNumSub, majorityReset } from "../actions/gameActions";
 
 import Header from "./header";
 import Footer from "./footer";
@@ -13,10 +14,18 @@ class RoleSelect extends Component {
     super();
     this.state = {
       pressed: false,
-      readyToConfirm: false
     };
 
+    this.handleConfirm = this.handleConfirm.bind(this);
     this.handleStart = this.handleStart.bind(this);
+  }
+
+  handleConfirm(e) {
+    this.setState({
+      ...this.state,
+      pressed: true
+    })
+    this.props.majAdd();
   }
 
   handleStart(e) {
@@ -31,7 +40,7 @@ class RoleSelect extends Component {
     } else if (this.state.pressed) {
       button = (
         <StartButtonPressed>
-          Confirmed - {this.props.majNum}/{this.props.numPlayers}
+          Confirmed - {this.props.majNum}/{this.props.playersNum}
         </StartButtonPressed>
       );
     } else if (this.props.playersNum + 3 - this.props.numRoleSelected <= 0) {
@@ -53,7 +62,6 @@ class RoleSelect extends Component {
         <Header />
         <Roles />
         {button}
-        <StartButton onClick={this.handleConfirm}> Next I </StartButton>
         <Footer />
       </MainWrapper>
     );
@@ -70,7 +78,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setPhase: gamePhase => dispatch(setPhaseState(gamePhase, true))
+    setPhase: gamePhase => dispatch(setPhaseState(gamePhase, true)),
+    majAdd: () => dispatch(majorityNumAdd()),
   };
 };
 

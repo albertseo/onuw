@@ -35,6 +35,12 @@ io.on("connection", socket => {
     }
   });
 
+  socket.on(types.MAJORITY_RESET, payload => {
+    game.setMajorityNum(0);
+    io.sockets.emit(types.UPDATE_MAJORITY, game.getMajorityNum());
+    io.sockets.emit(types.UPDATE_MAJORITY_READY, false);
+  });
+
   socket.on(types.ROLE_TOGGLE, payload => {
     game.roleToggle(payload);
     io.sockets.emit(types.UPDATE_ALL_ROLES, game.getAllRoles());
