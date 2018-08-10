@@ -3,16 +3,27 @@ const roles = require("./gameConsts.js").roles;
 class Game {
   constructor() {
     // Sets up the game object with the same initial state as the client
-    this.players = {}; // The current players in the game
+    this.players = {}; // The current players in the game with the games
+    this.playerSockets = {};  // Map the players to their socket id's
+    this.centerCards = {
+      "Alpha": "",
+      "Beta": "",
+      "Gamma": ""
+    };
     this.gamePhase = "Intro"; // Current state of the game, determines what view to show
     this.currentRoles = []; // The roles that are in the current game
     this.allRoles = roles; // All of the roles that are available in the game
-    this.majorityNum = 0 // Number used to confirm everyone
+    this.majorityNum = 0; // Number used to confirm everyone
   }
 
   // Gets the list of players
   getPlayers() {
     return this.players;
+  }
+
+  // Gets the list of players and socket id's
+  getPlayerSockets() {
+    return this.playerSockets;
   }
 
   // Gets the number of players
@@ -45,6 +56,21 @@ class Game {
     return this.players[playerName];
   }
 
+  // Sets a player's Role
+  setPlayerRole(playerName, role) {
+    this.players = {
+      ...this.players,
+      [playerName]: role
+    }
+  }
+
+  // Sets a center card's Role
+  setCenterRole(playerName, role) {
+    this.centerCards = {
+      ...this.centerCards,
+      [playerName]: role
+    }
+  }
   setMajorityNum(num) {
     this.majorityNum = num;
   }
@@ -57,6 +83,14 @@ class Game {
     };
   }
 
+  // Add a player and thier socket ID
+  addPlayerSocket(playerName, socketID) {
+    this.playerSockets = {
+      ...this.playerSockets,
+      [playerName]: socketID
+    };
+  }
+
   // Changes the gamePhase
   changeGamePhase(newPhase) {
     this.gamePhase = newPhase;
@@ -65,6 +99,39 @@ class Game {
   // Toggle if a role is selected for the game
   roleToggle(payload) {
     this.allRoles[payload.role] = !payload.select;
+  }
+
+  // Put the selected roles into Current Roles
+  setCurrentRoles() {
+    for (var role in this.allRoles) {
+      if (this.allRoles[role]) {
+        this.currentRoles.push(role);
+      }
+    }
+  }
+
+  // Shuffle the list of roles and assign them to players
+  setPlayersRoles() {
+    // Shuffle list
+    let currentIndex = this.currentRoles.length;
+    let tempValue, randIndex;
+    while (currentIndex != 0) {
+      randIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      tempValue = this.currentRoles[currentIndex];
+      this.currentRoles[currentIndex] = this.currentRoles[randIndex];
+      this.currentRoles[randIndex] = tempValue;
+    }
+    // Assign roles to players
+    let currentRoleCopy = this.currentRoles;
+    for (var player in this.players) {
+      this.setPlayerRole(player, currentRoleCopy.pop());
+    }
+    // Assing roles to center cards
+    for (var card in this.centerCards) {
+      this.setCenterRole(card, currentRoleCopy.pop());
+    }
   }
 
   // Execute the player's action depending on the player
@@ -113,7 +180,7 @@ class Game {
 
   // The villager has no action during the night
   villagerAction(player, action) {
-      return;
+    return;
   }
 
   // Werewolf can either know who the other werewolfs are, or look at a center card

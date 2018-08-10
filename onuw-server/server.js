@@ -13,19 +13,27 @@ const Game = require('./game.js');
 const game = new Game();
 
 io.on("connection", socket => {
+  io.to(null).emit('hey', 'I just met you');
   console.log("client connected, id: ", socket.id);
 
   // When client connects, add them to the game object and update all clients with new player
   socket.on(types.ADD_PLAYER, payload => {
     game.addPlayer(payload.name, payload.role);
+    game.addPlayerSocket(payload.name, socket.id);
     io.sockets.emit(types.UPDATE_PLAYERS, game.getPlayers());
   });
 
   // When the client advances gamephase, update server game and all clients with new gamePhase
   socket.on(types.NEW_GAMEPHASE, payload => {
     game.changeGamePhase(payload);
-    if (payload === "Night") {
-      game.generateRoles(); // Generate roles for each player
+    switch (payload) {
+      case "Night": 
+        game.setCurrentRoles();
+        game.setPlayersRoles();
+        let playerSocket = game.getPlayerSockets();
+        for (var player in playerSocket) {
+          io.to(playerSocket[player]).emit(types.UPDATE_ROLE, game.getPlayersRole(player));
+        }
     }
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });

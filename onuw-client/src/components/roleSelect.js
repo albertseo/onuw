@@ -29,7 +29,7 @@ class RoleSelect extends Component {
   }
 
   handleStart(e) {
-    this.props.setPhase("Night");
+    this.props.setPhase("Night", true);
   }
 
   render() {
