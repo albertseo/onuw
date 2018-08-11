@@ -13,7 +13,6 @@ const Game = require('./game.js');
 const game = new Game();
 
 io.on("connection", socket => {
-  io.to(null).emit('hey', 'I just met you');
   console.log("client connected, id: ", socket.id);
 
   // When client connects, add them to the game object and update all clients with new player
@@ -29,10 +28,13 @@ io.on("connection", socket => {
     switch (payload) {
       case "Night": 
         game.setCurrentRoles();
+        game.printAll();
         game.setPlayersRoles();
+        game.printAll();
         let playerSocket = game.getPlayerSockets();
         for (var player in playerSocket) {
           io.to(playerSocket[player]).emit(types.UPDATE_ROLE, game.getPlayersRole(player));
+          io.to(playerSocket[player]).emit(types.UPDATE_ROLEDESCRIPTION, game.getPlayersDescription(player));
         }
     }
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());

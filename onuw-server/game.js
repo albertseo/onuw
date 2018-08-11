@@ -1,9 +1,10 @@
 const roles = require("./gameConsts.js").roles;
+const descriptions = require("./gameConsts.js").descriptions;
 // This is the master server copy of a game that is running
 class Game {
   constructor() {
     // Sets up the game object with the same initial state as the client
-    this.players = {}; // The current players in the game with the games
+    this.players = {}; // The current players in the game with their roles
     this.playerSockets = {};  // Map the players to their socket id's
     this.centerCards = {
       "Alpha": "",
@@ -13,7 +14,35 @@ class Game {
     this.gamePhase = "Intro"; // Current state of the game, determines what view to show
     this.currentRoles = []; // The roles that are in the current game
     this.allRoles = roles; // All of the roles that are available in the game
+    this.currentDescriptions = {}; // Descriptions that will be used this game
+    this.allDescriptions = descriptions; // All the descriptions for the roles
     this.majorityNum = 0; // Number used to confirm everyone
+    this.werewolves = []; // The players that are werewolves in this game
+    this.masons = []; // The playesr that are masons in this game
+  }
+
+  // Print the status of the game
+  printAll() {
+    console.log("===============================");
+    console.log("Players: ");
+    console.log(this.players);
+    console.log("Player Sockets");
+    console.log(this.playerSockets);
+    console.log("Center Cards:")
+    console.log(this.centerCards);
+    console.log("GamePhase");
+    console.log(this.gamePhase);
+    console.log("Current Roles");
+    console.log(this.currentRoles);
+    console.log("Current Descriptions");
+    console.log(this.currentDescriptions);
+    console.log("Majority Num");
+    console.log(this.majorityNum);
+    console.log("Werewolves");
+    console.log(this.werewolves);
+    console.log("Masons");
+    console.log(this.masons);
+    console.log("===============================");
   }
 
   // Gets the list of players
@@ -54,6 +83,11 @@ class Game {
   // Get the role of a specific player
   getPlayersRole(playerName) {
     return this.players[playerName];
+  }
+
+  // Get the description of a specific player
+  getPlayersDescription(playerName) {
+    return this.currentDescriptions[playerName];
   }
 
   // Sets a player's Role
@@ -123,11 +157,39 @@ class Game {
       this.currentRoles[currentIndex] = this.currentRoles[randIndex];
       this.currentRoles[randIndex] = tempValue;
     }
+
     // Assign roles to players
-    let currentRoleCopy = this.currentRoles;
+    let currentRoleCopy = this.currentRoles.slice(0)
     for (var player in this.players) {
-      this.setPlayerRole(player, currentRoleCopy.pop());
+      let role = currentRoleCopy.pop()
+      this.setPlayerRole(player, role);
+      // Check if role is werewolf or mason
+      if (role === "Werewolf 1" || role === "Werewolf 2") {
+        this.werewolves.push(player);
+      } else if (role === "Mason 1" || role === "Mason 2") {
+        this.masons.push(player);
+      }
+      // Set current role Descriptions
+      this.currentDescriptions = {
+        ...this.currentDescriptions,
+        [player]: this.allDescriptions[role]
+      }
     }
+    
+    // Werewolf checks
+    if (this.werewolves.length === 1) { // Check if there is a lone werewolf
+      this.setPlayerRole(this.werewolves[0], "Lone Werewolf");
+    } else { // Else edit the description of werewolf
+      for (var werewolf in this.werewolves) {
+        this.currentDescriptions.werewolfDescription += werewolf + " "
+      }
+    }
+
+    // Mason checks
+    for (var mason in this.masons) {
+      this.currentDescriptions.masonDescription += mason + " "
+    }
+    
     // Assing roles to center cards
     for (var card in this.centerCards) {
       this.setCenterRole(card, currentRoleCopy.pop());
@@ -139,40 +201,28 @@ class Game {
     switch (player) {
       case roles.Villager:
         villagerAction(player, action);
-        break;
       case roles.Werewolf:
         werewolfAction(player, action);
-        break;
       case roles.Seer:
         seerAction(player, action);
-        break;
       case roles.Robber:
         robberAction(player, action);
-        break;
       case roles.Troublemaker:
         troublemakerAction(player, action);
-        break;
       case roles.Tanner:
         tannerAction(player, action);
-        break;
       case roles.Drunk:
         drunkAction(player, action);
-        break;
       case roles.Hunter:
         hunterAction(player, action);
-        break;
       case roles.Mason:
         masonAction(player, action);
-        break;
       case roles.Insomniac:
         insomniacAction(player, action);
-        break;
       case roles.Minion:
         minionAction(player, action);
-        break;
       case roles.Doppleganger:
         dopplegangerAction(player, action);
-        break;
       default:
         return "Role not found";
     }
