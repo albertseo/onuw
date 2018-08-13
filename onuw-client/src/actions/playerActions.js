@@ -22,10 +22,12 @@ export function toggleSelect(playerName, isSelected) {
       // Currently not selected, check if can select more
       dispatch(setSelect(playerName, isSelected));
       dispatch(subSelect());
+      dispatch(addSelectPlayer(playerName));
     } else if (isSelected) {
       // Currently selected, can always deselect
       dispatch(setSelect(playerName, isSelected));
       dispatch(addSelect());
+      dispatch(subSelectPlayer(playerName));
     }
   };
 }
@@ -86,4 +88,18 @@ function subSelect() {
     type: types.SELECT_SUB,
     payload: null
   };
+}
+
+function addSelectPlayer(playerName) {
+  return {
+    type: types.NIGHT_PLAYER_ADD,
+    payload: playerName
+  }
+}
+
+function subSelectPlayer(playerName) {
+  return {
+    type: types.NIGHT_PLAYER_SUB,
+    payload: playerName
+  }
 }
