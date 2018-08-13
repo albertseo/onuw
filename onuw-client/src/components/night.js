@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 
 import Header from "./header";
 import Footer from "./footer";
-import Players from "./players";
-import CenterCards from "./centerCards";
-import { MainWrapper, RoleDisplay } from "../theme/styles";
+import PlayersNight from "./playersNight";
+import CenterCardsNight from "./centerCardsNight";
+import { MainWrapper, RoleDisplay, DescriptionDisplay } from "../theme/styles";
 
 class Night extends Component {
   render() {
@@ -13,9 +13,9 @@ class Night extends Component {
       <MainWrapper>
         <Header />
         <RoleDisplay>Your Role: {this.props.userRole}</RoleDisplay>
-        <RoleDisplay>{this.props.userRoleDescription}</RoleDisplay>
-        <Players />
-        <CenterCards />
+        <DescriptionDisplay>{this.props.userRoleDescription}</DescriptionDisplay>
+        <PlayersNight />
+        <CenterCardsNight />
         <Footer />
       </MainWrapper>
     );

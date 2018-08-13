@@ -17,8 +17,7 @@ class Roles extends Component {
     this.handleSelect = this.handleSelect.bind(this);
   }
 
-  handleSelect(e) {
-    let role = e.target.textContent;
+  handleSelect(role) {
     let selected = this.props.roles[role];
     this.handleToggle(role, selected);
   }
@@ -49,13 +48,13 @@ class Roles extends Component {
           {Object.keys(this.props.roles).map(role => {
             if (!this.props.roles[role]) {
               return (
-                <PlayerCard key={role} onClick={this.handleSelect}>
+                <PlayerCard key={role} onClick={() => this.handleSelect(role)}>
                   {role}
                 </PlayerCard>
               );
             } else {
               return (
-                <PlayerCardSelected key={role} onClick={this.handleSelect}>
+                <PlayerCardSelected key={role} onClick={() => this.handleSelect(role)}>
                   {role}
                 </PlayerCardSelected>
               );

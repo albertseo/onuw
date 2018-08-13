@@ -8,26 +8,28 @@ import { baseSetRoles } from "./gameConstants";
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
   players: {
-    // "Alpha": false,
-    // "Beta": false,
-    // "Gamma": false
+    "Alpha": false,
+    "Beta": false,
+    "Gamma": false
   }, // The current players in the game
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
-  userRoleDescription: "temp", // description of user's role
-  gamePhase: "Intro", // Current state of the game, determines what view to show
+  userRoleDescription: "You may exchange your card with another player's card, and view your new card", // description of user's role
+  gamePhase: "Night", // Current state of the game, determines what view to show
   centerCards: { // Center cards during the game
     "Alpha": false,
     "Beta": false,
     "Gamma": false
   },
   nightSelectNum: 1, // How many cards that can be selected at once
+  nightSelectPlayer: [], // Player selected for night action
   majorityNum: 0, // Number to count if everyone is ready
   majorityReady: false, // Only true when everyone ready to move on
   allRoles: baseSetRoles, // All the roles that are available to pick from, and which are selected
   currentRoles: {}, // All of the roles that are in the current game
-  
   numRoleSelected: 0, // Number of roles that need to be selected 
+  // isPlayersSelectable: false, // If player cards are selectable
+  // isCenterSelectable: true, // True if center cards are selectable
 };
 
 const middleware = [thunk.withExtraArgument({ emit })];

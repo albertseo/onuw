@@ -6,6 +6,7 @@ import userRoleReducer from "./userRoleReducer";
 import userRoleDescriptionReduer from "./userRoleDescriptionReducer";
 import centerCardsReducer from "./centerCardsReducer";
 import nightSelectNumReducer from "./nightSelectNumReducer";
+import nightSelectPlayerReducer from "./nightSelectPlayerReducer";
 import majorityNumReducer from "./majorityNumReducer";
 import allRolesReducer from "./allRolesReducer";
 import currentRolesReducer from "./currentRolesReducer";
@@ -21,6 +22,7 @@ export default combineReducers({
   gamePhase: gamePhaseReducer,
   centerCards: centerCardsReducer,
   nightSelectNum: nightSelectNumReducer,
+  nightSelectPlayer: nightSelectPlayerReducer,
   majorityNum: majorityNumReducer,
   majorityReady: majorityReadyReducer,
   allRoles: allRolesReducer,

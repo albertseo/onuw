@@ -13,8 +13,15 @@ export const NUMROLESELECTED = "NUMROLESELECTED";
 // For gameActions:
 export const PLAYER_ACTION = "PLAYER_ACTION";
 export const TOGGLE_CARD = "TOGGLE_CARD";
+export const TOGGLE_CENTER = "TOGGLE_CENTER";
 export const SELECT_SUB = "SELECT_SUB";
 export const SELECT_ADD = "SELECT_ADD";
+
+// For night actions
+export const NIGHT_PLAYER_ADD = "NIGHT_PLAYER_ADD";
+export const NIGHT_PLAYER_SUB = "NIGHT_PLAYER_SUB";
+export const NIGHT_PLAYER_SET = "NIGHT_PLAYER_SUB";
+export const NIGHT_PLAYER_RESET = "NIGHT_PLAYER_RESET";
 
 // Actions that will dispatch from server:
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";

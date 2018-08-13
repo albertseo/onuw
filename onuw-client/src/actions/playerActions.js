@@ -18,13 +18,28 @@ export function newPlayerRole(playerName, playerRole = "") {
 export function toggleSelect(playerName, isSelected) {
   return function(dispatch, getState, { emit }) {
     // Toggles the status of a player/card
-    if (!isSelected && getState().numSelectMax > 0) {
+    if (!isSelected && getState().nightSelectNum > 0) {
       // Currently not selected, check if can select more
       dispatch(setSelect(playerName, isSelected));
       dispatch(subSelect());
     } else if (isSelected) {
       // Currently selected, can always deselect
       dispatch(setSelect(playerName, isSelected));
+      dispatch(addSelect());
+    }
+  };
+}
+
+export function toggleSelectCenter(playerName, isSelected) {
+  return function(dispatch, getState, { emit }) {
+    // Toggles the status of a player/card
+    if (!isSelected && getState().nightSelectNum > 0) {
+      // Currently not selected, check if can select more
+      dispatch(setSelectCenter(playerName, isSelected));
+      dispatch(subSelect());
+    } else if (isSelected) {
+      // Currently selected, can always deselect
+      dispatch(setSelectCenter(playerName, isSelected));
       dispatch(addSelect());
     }
   };
@@ -48,6 +63,13 @@ function addPlayer(playerName, playerRole = "") {
 function setSelect(playerName, isSelected) {
   return {
     type: types.TOGGLE_CARD,
+    payload: { name: playerName, select: isSelected }
+  };
+}
+
+function setSelectCenter(playerName, isSelected) {
+  return {
+    type: types.TOGGLE_CENTER,
     payload: { name: playerName, select: isSelected }
   };
 }

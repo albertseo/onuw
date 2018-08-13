@@ -38,6 +38,11 @@ const PlayerCard = styled.div`
     background-color: gray;
     cursor: pointer;
   }
+
+  @media (max-width: 500px) {
+    width: 40%;
+  }
+
 `;
 
 const PlayerCardSelected = styled.div`
@@ -175,6 +180,18 @@ const RoleDisplay = styled.div`
   font-size: 1.5em;
   margin-top: .75em;
   font-weight: bold;
+  text-align: center;
+`;
+
+// For the role description
+const DescriptionDisplay = styled.div`
+  display: flex;
+  color: #e5e5e5;
+  font-size: 1.1em;
+  margin-top: .75em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: .2em;
 `;
 
 // Style for Main Wrapper div
@@ -245,5 +262,6 @@ export {
   NameTextWrapper,
   SpacerDiv,
   RoleDisplay,
+  DescriptionDisplay,
   MainWrapper
 };
