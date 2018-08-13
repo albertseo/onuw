@@ -6,8 +6,7 @@ export default function nightSelectPlayerReducer(state = {}, action) {
     case types.NIGHT_PLAYER_ADD:
       return [...state, action.payload]
     case types.NIGHT_PLAYER_SUB:
-        return state.filter(player => player != action.payload);
-      return action.payload;
+      return state.filter(player => player !== action.payload);
     case types.NIGHT_PLAYER_RESET:
       return [];
     case types.NIGHT_PLAYER_SET:

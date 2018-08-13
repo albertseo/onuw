@@ -61,7 +61,7 @@ io.on("connection", socket => {
 
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
-    game.playerNightAction(payload.player, payload.action);
+    game.playerNightAction(payload.role, payload.selectedPlayers);
   });
 
   socket.on("disconnect", () => {

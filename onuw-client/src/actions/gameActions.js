@@ -29,6 +29,12 @@ export function majorityReset() {
   }
 }
 
+export function performNightAction(role, selectedPlayers) {
+  return function (dispatch, getState, { emit }) {
+    emit(types.PLAYER_ACTION, {role: role, selectedPlayers: selectedPlayers});
+  }
+}
+
 function majAdd() {
   return {
     type: types.MAJORITY_ADD,

@@ -5,10 +5,34 @@ import Header from "./header";
 import Footer from "./footer";
 import PlayersNight from "./playersNight";
 import CenterCardsNight from "./centerCardsNight";
-import { MainWrapper, RoleDisplay, DescriptionDisplay } from "../theme/styles";
+import { MainWrapper, RoleDisplay, DescriptionDisplay, StartButton } from "../theme/styles";
+import { performNightAction } from "../actions/gameActions";
 
 class Night extends Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      clicked: true
+    })
+    this.props.performNightAction(this.props.userRole, this.props.selectedPlayers);
+  }
+
   render() {
+    let button;
+    if (this.state.clicked) {
+        button = <StartButton>Waiting for other players...</StartButton>
+    } else {
+        button = <StartButton onClick={this.handleClick}>Perform Night Action</StartButton>
+    }
+    
     return (
       <MainWrapper>
         <Header />
@@ -16,6 +40,7 @@ class Night extends Component {
         <DescriptionDisplay>{this.props.userRoleDescription}</DescriptionDisplay>
         <PlayersNight />
         <CenterCardsNight />
+        {button}
         <Footer />
       </MainWrapper>
     );
@@ -24,7 +49,14 @@ class Night extends Component {
 
 const mapStateToProps = state => ({
   userRole: state.userRole,
-  userRoleDescription: state.userRoleDescription
+  userRoleDescription: state.userRoleDescription,
+  selectedPlayers: state.nightSelectPlayer
 });
 
-export default connect(mapStateToProps)(Night);
+const mapDispatchToProps = dispatch => {
+  return {
+    performNightAction: (role, selectedPlayer) => dispatch(performNightAction(role, selectedPlayer))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Night);
