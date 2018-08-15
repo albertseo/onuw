@@ -34,6 +34,7 @@ const drunk = "Drunk";
 const hunter = "Hunter";
 const mason = "Mason";
 const insomniac = "Insomniac";
+const minion = "Minion";
 const doppleganger = "Doppleganger";
 
 // Descriptions
@@ -57,6 +58,7 @@ module.exports.descriptions = {
     "Villager 2": villagerDescription,
     "Werewolf 1": werewolfDescription,
     "Werewolf 2": werewolfDescription,
+    "Werewolf": werewolfDescription,
     "Lone Werewolf": loneWerewolfDescription,
     "Seer": seerDescription,
     "Robber": robberDescription,
@@ -66,6 +68,8 @@ module.exports.descriptions = {
     "Hunter": hunterDescription,
     "Mason 1": masonDescription,
     "Mason 2": masonDescription,
+    "Mason": masonDescription,
     "Insomniac": insomniacDescription,
+    "Minion": werewolfDescription,
     "Doppleganger": dopplegangerDescription
 }

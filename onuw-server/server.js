@@ -35,6 +35,7 @@ io.on("connection", socket => {
         for (var player in playerSocket) {
           io.to(playerSocket[player]).emit(types.UPDATE_ROLE, game.getPlayersRole(player));
           io.to(playerSocket[player]).emit(types.UPDATE_ROLEDESCRIPTION, game.getPlayersDescription(player));
+          io.to(playerSocket[player]).emit(types.UPDATE_SELECT_NUM, game.getNightSelectNum(game.getPlayersRole(player)));
         }
     }
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
@@ -61,7 +62,9 @@ io.on("connection", socket => {
 
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
+    console.log("Got player action for: " + payload.role + " selected: " + payload.selectedPlayers);
     game.playerNightAction(payload.role, payload.selectedPlayers);
+    game.printAll();
   });
 
   socket.on("disconnect", () => {

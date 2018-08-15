@@ -29,6 +29,7 @@ class RoleSelect extends Component {
   }
 
   handleStart(e) {
+    this.props.majReset();
     this.props.setPhase("Night", true);
   }
 
@@ -80,6 +81,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setPhase: gamePhase => dispatch(setPhaseState(gamePhase, true)),
     majAdd: () => dispatch(majorityNumAdd()),
+    majReset: () => dispatch(majorityReset()),
   };
 };
 

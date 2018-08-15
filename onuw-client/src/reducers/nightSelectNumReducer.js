@@ -7,6 +7,8 @@ export default function nightSelectNumReducer(state = {}, action) {
         return state - 1;
     case types.SELECT_ADD:
         return state + 1;
+    case types.UPDATE_SELECT_NUM:
+        return action.payload;
     default:
       return state;
   }

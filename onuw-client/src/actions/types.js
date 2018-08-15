@@ -16,6 +16,7 @@ export const TOGGLE_CARD = "TOGGLE_CARD";
 export const TOGGLE_CENTER = "TOGGLE_CENTER";
 export const SELECT_SUB = "SELECT_SUB";
 export const SELECT_ADD = "SELECT_ADD";
+export const UPDATE_SELECT_NUM = "UPDATE_SELECT_NUM";
 
 // For night actions
 export const NIGHT_PLAYER_ADD = "NIGHT_PLAYER_ADD";
@@ -49,7 +50,8 @@ export const messageTypes = [
   UPDATE_MAJORITY,
   UPDATE_MAJORITY_READY,
   UPDATE_ALL_ROLES,
-  UPDATE_GAME_ROLES
+  UPDATE_GAME_ROLES,
+  UPDATE_SELECT_NUM
 ].reduce((accum, msg) => {
   accum[ msg ] = msg
   return accum

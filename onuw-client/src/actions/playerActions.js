@@ -39,10 +39,12 @@ export function toggleSelectCenter(playerName, isSelected) {
       // Currently not selected, check if can select more
       dispatch(setSelectCenter(playerName, isSelected));
       dispatch(subSelect());
+      dispatch(addSelectPlayer(playerName));
     } else if (isSelected) {
       // Currently selected, can always deselect
       dispatch(setSelectCenter(playerName, isSelected));
       dispatch(addSelect());
+      dispatch(subSelectPlayer(playerName));
     }
   };
 }

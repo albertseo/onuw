@@ -19,6 +19,7 @@ class Game {
     this.majorityNum = 0; // Number used to confirm everyone
     this.werewolves = []; // The players that are werewolves in this game
     this.masons = []; // The playesr that are masons in this game
+    this.playerActions = {}; // Stores all of the actions players have sent to server
   }
 
   // Print the status of the game
@@ -42,6 +43,8 @@ class Game {
     console.log(this.werewolves);
     console.log("Masons");
     console.log(this.masons);
+    console.log("Player Actions");
+    console.log(this.playerActions);
     console.log("===============================");
   }
 
@@ -90,6 +93,14 @@ class Game {
     return this.currentDescriptions[playerName];
   }
 
+  getNightSelectNum(role) {
+    if (role === "Seer" || role === "Troublemaker") {
+      return 2;
+    } else {
+      return 1;
+    }
+  }
+
   // Sets a player's Role
   setPlayerRole(playerName, role) {
     this.players = {
@@ -105,6 +116,7 @@ class Game {
       [playerName]: role
     }
   }
+
   setMajorityNum(num) {
     this.majorityNum = num;
   }
@@ -169,25 +181,37 @@ class Game {
       } else if (role === "Mason 1" || role === "Mason 2") {
         this.masons.push(player);
       }
-      // Set current role Descriptions
-      this.currentDescriptions = {
-        ...this.currentDescriptions,
-        [player]: this.allDescriptions[role]
-      }
     }
     
     // Werewolf checks
     if (this.werewolves.length === 1) { // Check if there is a lone werewolf
       this.setPlayerRole(this.werewolves[0], "Lone Werewolf");
     } else { // Else edit the description of werewolf
-      for (var werewolf in this.werewolves) {
-        this.currentDescriptions.werewolfDescription += werewolf + " "
+      for (var werewolf of this.werewolves) {
+        console.log(this.allDescriptions["Werewolf"]);
+        this.allDescriptions["Werewolf 1"] += werewolf + " ";
+        this.allDescriptions["Werewolf 2"] += werewolf + " ";
+        console.log(this.allDescriptions["Werewolf"]);
       }
     }
 
     // Mason checks
-    for (var mason in this.masons) {
-      this.currentDescriptions.masonDescription += mason + " "
+    for (var mason of this.masons) {
+      console.log(this.allDescriptions["Mason"]);
+      this.allDescriptions["Mason 1"] += mason + " ";
+      this.allDescriptions["Mason 2"] += mason + " ";
+      console.log(this.allDescriptions["Mason"]);
+    }
+
+    // Assign role descriptions for all players
+    for (var player in this.players) {
+      var role = this.getPlayersRole(player);
+      // Set current role Descriptions
+      this.currentDescriptions = {
+        ...this.currentDescriptions,
+        [player]: this.allDescriptions[role]
+      }
+      console.log(this.allDescriptions);
     }
     
     // Assing roles to center cards
@@ -198,6 +222,21 @@ class Game {
 
   // Execute the player's action depending on the player
   playerNightAction(player, action) {
+    // First logs the action
+    this.playerActions = {
+      ...this.playerActions,
+      [player]: action,
+    };
+    //Check if everyone has submitted an action
+    if (Object.keys(this.playerActions).length === Object.keys(this.players).length) {
+      // Perform actions in order
+      console.log("Ready to do actions");
+    }
+  }
+
+
+  // Do all of the night actions
+  doAllNightActions() {
     switch (player) {
       case roles.Villager:
         villagerAction(player, action);
