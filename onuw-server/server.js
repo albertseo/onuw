@@ -28,9 +28,7 @@ io.on("connection", socket => {
     switch (payload) {
       case "Night": 
         game.setCurrentRoles();
-        game.printAll();
         game.setPlayersRoles();
-        game.printAll();
         let playerSocket = game.getPlayerSockets();
         for (var player in playerSocket) {
           io.to(playerSocket[player]).emit(types.UPDATE_ROLE, game.getPlayersRole(player));
@@ -64,7 +62,6 @@ io.on("connection", socket => {
   socket.on(types.PLAYER_ACTION, payload => {
     console.log("Got player action for: " + payload.role + " selected: " + payload.selectedPlayers);
     game.playerNightAction(payload.role, payload.selectedPlayers);
-    game.printAll();
   });
 
   socket.on("disconnect", () => {

@@ -5,6 +5,7 @@ class Game {
   constructor() {
     // Sets up the game object with the same initial state as the client
     this.players = {}; // The current players in the game with their roles
+    this.playersNight = {}; // The current players in the game with their roles
     this.playerSockets = {};  // Map the players to their socket id's
     this.centerCards = {
       "Alpha": "",
@@ -20,6 +21,7 @@ class Game {
     this.werewolves = []; // The players that are werewolves in this game
     this.masons = []; // The playesr that are masons in this game
     this.playerActions = {}; // Stores all of the actions players have sent to server
+    this.messageBack = {}; // Messages to send back to players
   }
 
   // Print the status of the game
@@ -27,6 +29,8 @@ class Game {
     console.log("===============================");
     console.log("Players: ");
     console.log(this.players);
+    console.log("PlayersNight: ");
+    console.log(this.playersNight);
     console.log("Player Sockets");
     console.log(this.playerSockets);
     console.log("Center Cards:")
@@ -88,14 +92,50 @@ class Game {
     return this.players[playerName];
   }
 
+  getPlayersRoleNight(playerName) {
+    return this.playersNight[playerName];
+  }
+
+  // Get the player for a role
+  getRolesPlayerNight(role) {
+    for (var player in this.players) {
+      if (this.players[player] === role) {
+        return player;
+      }
+    }
+  }
+
+  // Get the player for a role
+  getRolesPlayerNight(role) {
+    for (var player in this.playersNight) {
+      if (this.playersNight[player] === role) {
+        return player;
+      }
+    }
+  }
+
   // Get the description of a specific player
   getPlayersDescription(playerName) {
     return this.currentDescriptions[playerName];
   }
 
   getNightSelectNum(role) {
+    let noActionRoles = [
+      "Villager 1",
+      "Villager 2",
+      "Minion",
+      "Mason 1",
+      "Mason 2",
+      "Werewolf 1",
+      "Werewolf 2",
+      "Tanner",
+      "Hunter",
+      "Insomniac"
+    ];
     if (role === "Seer" || role === "Troublemaker") {
       return 2;
+    } else if (noActionRoles.indexOf(role) > -1) {
+      return 0;
     } else {
       return 1;
     }
@@ -188,19 +228,15 @@ class Game {
       this.setPlayerRole(this.werewolves[0], "Lone Werewolf");
     } else { // Else edit the description of werewolf
       for (var werewolf of this.werewolves) {
-        console.log(this.allDescriptions["Werewolf"]);
         this.allDescriptions["Werewolf 1"] += werewolf + " ";
         this.allDescriptions["Werewolf 2"] += werewolf + " ";
-        console.log(this.allDescriptions["Werewolf"]);
       }
     }
 
     // Mason checks
     for (var mason of this.masons) {
-      console.log(this.allDescriptions["Mason"]);
       this.allDescriptions["Mason 1"] += mason + " ";
       this.allDescriptions["Mason 2"] += mason + " ";
-      console.log(this.allDescriptions["Mason"]);
     }
 
     // Assign role descriptions for all players
@@ -211,7 +247,6 @@ class Game {
         ...this.currentDescriptions,
         [player]: this.allDescriptions[role]
       }
-      console.log(this.allDescriptions);
     }
     
     // Assing roles to center cards
@@ -229,59 +264,57 @@ class Game {
     };
     //Check if everyone has submitted an action
     if (Object.keys(this.playerActions).length === Object.keys(this.players).length) {
-      // Perform actions in order
-      console.log("Ready to do actions");
+      this.doBaseNightActions();
     }
   }
 
 
   // Do all of the night actions
-  doAllNightActions() {
-    switch (player) {
-      case roles.Villager:
-        villagerAction(player, action);
-      case roles.Werewolf:
-        werewolfAction(player, action);
-      case roles.Seer:
-        seerAction(player, action);
-      case roles.Robber:
-        robberAction(player, action);
-      case roles.Troublemaker:
-        troublemakerAction(player, action);
-      case roles.Tanner:
-        tannerAction(player, action);
-      case roles.Drunk:
-        drunkAction(player, action);
-      case roles.Hunter:
-        hunterAction(player, action);
-      case roles.Mason:
-        masonAction(player, action);
-      case roles.Insomniac:
-        insomniacAction(player, action);
-      case roles.Minion:
-        minionAction(player, action);
-      case roles.Doppleganger:
-        dopplegangerAction(player, action);
-      default:
-        return "Role not found";
+  doBaseNightActions() {
+    this.playersNight = this.players.slice();
+    this.printAll();
+    //If doppleganger were implemented, it would go here
+    if (this.exists("Lone Werewolf")) {
+      this.messageBack.LoneWerewolf = "The center card you discovered is " + this.getPlayersRoleNight(this.playerActions.LoneWerewolf);
     }
+    if (this.exists("Seer")) {
+      let messageIntro = "The card you see is "
+      for (var card in this.playerActions.Seer) {
+        messageIntro += this.getPlayersRoleNight(card) + " ";
+      }
+      this.messageBack.Seer = messageIntro;
+    }
+    if (this.exists("Robber")) {
+      this.swapPlayersRole(this.getRolesPlayer("Robber"), this.playerActions.Robber);
+      this.messageBack.Robber = "You have swapped your role with " + this.playerActions.Robber + ", you are now " + this.getPlayersRoleNight("Robber");
+    }
+    if (this.exists("Troublemaker")) {
+      this.swapPlayersRole(this.playerActions.Troublemaker[0], this.playerActions.Troublemaker[1]);
+      this.messageBack.Troublemaker = "You have switched the roles of " + this.playerActions.Troublemaker[0] + " and " + this.playerActions.Troublemaker[1];
+    }
+    if (this.exists("Drunk")) {
+      this.swapPlayersRole(this.getRolesPlayer("Drunk"), this.playerActions.Drunk);
+      this.messageBack.Robber = "You have swapped your role with a center card";
+    }
+    if (this.exists("Insomniac")) {
+      if (this.getRolesPlayer("Insomniac") === this.getRolesPlayerNight("Insomniac")) {
+        this.messageBack.Insomniac = "You look at your card at the end of the night and you are still an Insomnaic";
+      } else {
+        this.messageBack.Insomniac = "You look at your card at the end of the night and you are now an " + this.getPlayersRoleNight(this.getRolesPlayer("Insomniac"));
+      }
+    }
+    this.printAll();
   }
 
-  // The villager has no action during the night
-  villagerAction(player, action) {
-    return;
-  }
-
-  // Werewolf can either know who the other werewolfs are, or look at a center card
-  werewolfAction(player, action) {
-    return;
+  exists(role) {
+    return this.playerActions.indexOf(role) > -1;
   }
 
   // Swaps the roles of two players
   swapPlayersRole(player1, player2) {
-    let temp = this.players[player1];
-    this.players[player1] = this.players[player2];
-    this.players[player2] = temp;
+    let temp = this.playersNight[player1];
+    this.playersNight[player1] = this.playersNight[player2];
+    this.playersNight[player2] = temp;
   }
 }
 
