@@ -12,6 +12,7 @@ class Game {
       "Beta": "",
       "Gamma": ""
     };
+    this.centerCardsNight = {}; // Center cards during the night
     this.gamePhase = "Intro"; // Current state of the game, determines what view to show
     this.currentRoles = []; // The roles that are in the current game
     this.allRoles = roles; // All of the roles that are available in the game
@@ -49,6 +50,8 @@ class Game {
     console.log(this.masons);
     console.log("Player Actions");
     console.log(this.playerActions);
+    console.log("Message Back");
+    console.log(this.messageBack);
     console.log("===============================");
   }
 
@@ -89,27 +92,54 @@ class Game {
 
   // Get the role of a specific player
   getPlayersRole(playerName) {
-    return this.players[playerName];
+    if (playerName in this.players) {
+      console.log("In the players");
+      return this.players[playerName];
+    } else {
+      console.log("In the center");
+      console.log(this.centerCards[playerName]);
+      return this.centerCards[playerName];
+    }
   }
 
   getPlayersRoleNight(playerName) {
-    return this.playersNight[playerName];
+    if (playerName in this.playersNight) {
+      console.log("In the players");
+      return this.playersNight[playerName];
+    } else {
+      console.log("In the center");
+      return this.centerCardsNight[playerName];
+    }
   }
 
   // Get the player for a role
-  getRolesPlayerNight(role) {
+  getRolesPlayer(role) {
     for (var player in this.players) {
       if (this.players[player] === role) {
+        console.log("In the players");
         return player;
+      }
+    }
+    for (var centers in this.centerCards) {
+      if (this.centerCards[player] === role) {
+        console.log("In the center");
+        return centers;
       }
     }
   }
 
   // Get the player for a role
   getRolesPlayerNight(role) {
-    for (var player in this.playersNight) {
-      if (this.playersNight[player] === role) {
+    for (var player in this.players) {
+      if (this.players[player] === role) {
+        console.log("In the players");
         return player;
+      }
+    }
+    for (var centers in this.centerCardsNight) {
+      if (this.centerCardsNight[player] === role) {
+        console.log("In the center");
+        return centers;
       }
     }
   }
@@ -143,9 +173,25 @@ class Game {
 
   // Sets a player's Role
   setPlayerRole(playerName, role) {
-    this.players = {
-      ...this.players,
-      [playerName]: role
+      if (playerName in this.players) {
+      this.players = {
+        ...this.players,
+        [playerName]: role
+      }
+    } else {
+      this.setCenterRole(playerName, role);
+    }
+  }
+
+  // Sets a player's Role
+  setPlayerRoleNight(playerName, role) {
+      if (playerName in this.playersNight) {
+      this.playersNight = {
+        ...this.playersNight,
+        [playerName]: role
+      }
+    } else {
+      this.setCenterRoleNight(playerName, role);
     }
   }
 
@@ -157,6 +203,14 @@ class Game {
     }
   }
 
+  // Sets a center card's Role
+  setCenterRoleNight(playerName, role) {
+    this.centerCardsNight = {
+      ...this.centerCardsNight,
+      [playerName]: role
+    }
+  }
+  
   setMajorityNum(num) {
     this.majorityNum = num;
   }
@@ -271,30 +325,35 @@ class Game {
 
   // Do all of the night actions
   doBaseNightActions() {
-    this.playersNight = this.players.slice();
+    this.playersNight = Object.assign({}, this.players);
+    this.centerCardsNight = Object.assign({}, this.centerCards);
+    console.log("******* STARTING NIGHT ACTIONS ***********");
     this.printAll();
     //If doppleganger were implemented, it would go here
     if (this.exists("Lone Werewolf")) {
-      this.messageBack.LoneWerewolf = "The center card you discovered is " + this.getPlayersRoleNight(this.playerActions.LoneWerewolf);
+      console.log(this.playerActions['Lone Werewolf']);
+      console.log(this.playerActions['Lone Werewolf'][0]);
+      this.messageBack["Lone Werewolf"] = "The center card you discovered is " + this.getPlayersRoleNight(this.playerActions["Lone Werewolf"][0]);
     }
     if (this.exists("Seer")) {
       let messageIntro = "The card you see is "
-      for (var card in this.playerActions.Seer) {
-        messageIntro += this.getPlayersRoleNight(card) + " ";
-      }
+      this.playerActions.Seer.forEach(card => {
+        console.log(card);
+        messageIntro += card + ": " + this.getPlayersRoleNight(card) + " ";
+      });
       this.messageBack.Seer = messageIntro;
     }
     if (this.exists("Robber")) {
-      this.swapPlayersRole(this.getRolesPlayer("Robber"), this.playerActions.Robber);
-      this.messageBack.Robber = "You have swapped your role with " + this.playerActions.Robber + ", you are now " + this.getPlayersRoleNight("Robber");
+      this.swapPlayersRole(this.getRolesPlayer("Robber"), this.playerActions["Robber"][0]);
+      this.messageBack.Robber = "You have swapped your role with " + this.playerActions["Robber"][0] + ", you are now " + this.getRolesPlayerNight("Robber");
     }
     if (this.exists("Troublemaker")) {
-      this.swapPlayersRole(this.playerActions.Troublemaker[0], this.playerActions.Troublemaker[1]);
-      this.messageBack.Troublemaker = "You have switched the roles of " + this.playerActions.Troublemaker[0] + " and " + this.playerActions.Troublemaker[1];
+      this.swapPlayersRole(this.playerActions["Troublemaker"][0], this.playerActions["Troublemaker"][1]);
+      this.messageBack.Troublemaker = "You have switched the roles of " + this.playerActions["Troublemaker"][0] + " and " + this.playerActions["Troublemaker"][1];
     }
     if (this.exists("Drunk")) {
-      this.swapPlayersRole(this.getRolesPlayer("Drunk"), this.playerActions.Drunk);
-      this.messageBack.Robber = "You have swapped your role with a center card";
+      this.swapPlayersRole(this.getRolesPlayer("Drunk"), this.playerActions["Drunk"]);
+      this.messageBack.Drunk= "You have swapped your role with a center card";
     }
     if (this.exists("Insomniac")) {
       if (this.getRolesPlayer("Insomniac") === this.getRolesPlayerNight("Insomniac")) {
@@ -303,18 +362,19 @@ class Game {
         this.messageBack.Insomniac = "You look at your card at the end of the night and you are now an " + this.getPlayersRoleNight(this.getRolesPlayer("Insomniac"));
       }
     }
+    console.log("******* ENDING NIGHT ACTIONS ***********");
     this.printAll();
   }
 
   exists(role) {
-    return this.playerActions.indexOf(role) > -1;
+    return role in this.playerActions;
   }
 
   // Swaps the roles of two players
   swapPlayersRole(player1, player2) {
-    let temp = this.playersNight[player1];
-    this.playersNight[player1] = this.playersNight[player2];
-    this.playersNight[player2] = temp;
+    let temp = this.getPlayersRoleNight(player1)
+    this.setPlayerRole(player1, this.getPlayersRoleNight(player2));
+    this.setPlayerRole(player2, temp);
   }
 }
 

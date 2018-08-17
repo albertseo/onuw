@@ -43,6 +43,8 @@ class Night extends Component {
       "Minion",
       "Mason 1",
       "Mason 2",
+      "Werewolf 1",
+      "Werewolf 2",
       "Tanner",
       "Hunter",
       "Insomniac"

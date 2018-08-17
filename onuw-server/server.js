@@ -60,7 +60,7 @@ io.on("connection", socket => {
 
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
-    console.log("Got player action for: " + payload.role + " selected: " + payload.selectedPlayers);
+    console.log("Got player action for: " + payload.role + " selected: " + payload.selectedPlayers, " socketID: " + socket.id);
     game.playerNightAction(payload.role, payload.selectedPlayers);
   });
 
