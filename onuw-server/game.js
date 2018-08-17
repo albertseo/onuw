@@ -93,21 +93,16 @@ class Game {
   // Get the role of a specific player
   getPlayersRole(playerName) {
     if (playerName in this.players) {
-      console.log("In the players");
       return this.players[playerName];
     } else {
-      console.log("In the center");
-      console.log(this.centerCards[playerName]);
       return this.centerCards[playerName];
     }
   }
 
   getPlayersRoleNight(playerName) {
     if (playerName in this.playersNight) {
-      console.log("In the players");
       return this.playersNight[playerName];
     } else {
-      console.log("In the center");
       return this.centerCardsNight[playerName];
     }
   }
@@ -116,13 +111,11 @@ class Game {
   getRolesPlayer(role) {
     for (var player in this.players) {
       if (this.players[player] === role) {
-        console.log("In the players");
         return player;
       }
     }
     for (var centers in this.centerCards) {
       if (this.centerCards[player] === role) {
-        console.log("In the center");
         return centers;
       }
     }
@@ -130,15 +123,13 @@ class Game {
 
   // Get the player for a role
   getRolesPlayerNight(role) {
-    for (var player in this.players) {
-      if (this.players[player] === role) {
-        console.log("In the players");
+    for (var player in this.playersNight) {
+      if (this.playersNight[player] === role) {
         return player;
       }
     }
     for (var centers in this.centerCardsNight) {
       if (this.centerCardsNight[player] === role) {
-        console.log("In the center");
         return centers;
       }
     }
@@ -284,6 +275,7 @@ class Game {
       for (var werewolf of this.werewolves) {
         this.allDescriptions["Werewolf 1"] += werewolf + " ";
         this.allDescriptions["Werewolf 2"] += werewolf + " ";
+        this.allDescriptions["Minion"] += werewolf + " ";
       }
     }
 
@@ -331,9 +323,7 @@ class Game {
     this.printAll();
     //If doppleganger were implemented, it would go here
     if (this.exists("Lone Werewolf")) {
-      console.log(this.playerActions['Lone Werewolf']);
-      console.log(this.playerActions['Lone Werewolf'][0]);
-      this.messageBack["Lone Werewolf"] = "The center card you discovered is " + this.getPlayersRoleNight(this.playerActions["Lone Werewolf"][0]);
+      this.messageBack["Lone Werewolf"] = "The center card you discovered is " + this.playerActions["Lone Werewolf"][0] + ": " + this.getPlayersRoleNight(this.playerActions["Lone Werewolf"][0]);
     }
     if (this.exists("Seer")) {
       let messageIntro = "The card you see is "
@@ -345,7 +335,7 @@ class Game {
     }
     if (this.exists("Robber")) {
       this.swapPlayersRole(this.getRolesPlayer("Robber"), this.playerActions["Robber"][0]);
-      this.messageBack.Robber = "You have swapped your role with " + this.playerActions["Robber"][0] + ", you are now " + this.getRolesPlayerNight("Robber");
+      this.messageBack.Robber = "You have swapped your role with " + this.playerActions["Robber"][0] + ", you are now " + this.getPlayersRole(this.playerActions["Robber"][0]);
     }
     if (this.exists("Troublemaker")) {
       this.swapPlayersRole(this.playerActions["Troublemaker"][0], this.playerActions["Troublemaker"][1]);
@@ -359,7 +349,7 @@ class Game {
       if (this.getRolesPlayer("Insomniac") === this.getRolesPlayerNight("Insomniac")) {
         this.messageBack.Insomniac = "You look at your card at the end of the night and you are still an Insomnaic";
       } else {
-        this.messageBack.Insomniac = "You look at your card at the end of the night and you are now an " + this.getPlayersRoleNight(this.getRolesPlayer("Insomniac"));
+        this.messageBack.Insomniac = "You look at your card at the end of the night and you are now: " + this.getPlayersRoleNight(this.getRolesPlayer("Insomniac"));
       }
     }
     console.log("******* ENDING NIGHT ACTIONS ***********");
@@ -373,8 +363,8 @@ class Game {
   // Swaps the roles of two players
   swapPlayersRole(player1, player2) {
     let temp = this.getPlayersRoleNight(player1)
-    this.setPlayerRole(player1, this.getPlayersRoleNight(player2));
-    this.setPlayerRole(player2, temp);
+    this.setPlayerRoleNight(player1, this.getPlayersRoleNight(player2));
+    this.setPlayerRoleNight(player2, temp);
   }
 }
 
