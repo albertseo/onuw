@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { setPhaseState } from "../actions/gameStateActions";
-import { majorityNumAdd, majorityNumSub, majorityReset } from "../actions/gameActions";
+import { majorityNumAdd, majorityReset } from "../actions/gameActions";
 
 import Header from "./header";
 import Footer from "./footer";

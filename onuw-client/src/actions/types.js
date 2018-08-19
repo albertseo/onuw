@@ -39,6 +39,7 @@ export const UPDATE_MAJORITY_READY = "UPDATE_MAJORITY_READY";
 export const UPDATE_MAJORITY = "UPDATE_MAJORITY";
 export const UPDATE_ALL_ROLES = "UPDATE_ALL_ROLES";
 export const UPDATE_GAME_ROLES = "UPDATE_GAME_ROLES";
+export const UPDATE_DAYDESCRIPTION = "UPDATE_DAYDESCRIPTION";
 
 // For communicating with the server, there are the actions the client listens for
 // makes an object of the form {userNew: 'userNew'}
@@ -51,7 +52,8 @@ export const messageTypes = [
   UPDATE_MAJORITY_READY,
   UPDATE_ALL_ROLES,
   UPDATE_GAME_ROLES,
-  UPDATE_SELECT_NUM
+  UPDATE_SELECT_NUM,
+  UPDATE_DAYDESCRIPTION
 ].reduce((accum, msg) => {
   accum[ msg ] = msg
   return accum

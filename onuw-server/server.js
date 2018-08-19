@@ -9,7 +9,7 @@ const io = socket(server);
 const types = require("./types.js").types;
 
 // import Game from "./game.js";
-const Game = require('./game.js');
+const Game = require("./game.js");
 const game = new Game();
 
 io.on("connection", socket => {
@@ -26,14 +26,23 @@ io.on("connection", socket => {
   socket.on(types.NEW_GAMEPHASE, payload => {
     game.changeGamePhase(payload);
     switch (payload) {
-      case "Night": 
+      case "Night":
         game.setCurrentRoles();
         game.setPlayersRoles();
         let playerSocket = game.getPlayerSockets();
         for (var player in playerSocket) {
-          io.to(playerSocket[player]).emit(types.UPDATE_ROLE, game.getPlayersRole(player));
-          io.to(playerSocket[player]).emit(types.UPDATE_ROLEDESCRIPTION, game.getPlayersDescription(player));
-          io.to(playerSocket[player]).emit(types.UPDATE_SELECT_NUM, game.getNightSelectNum(game.getPlayersRole(player)));
+          io.to(playerSocket[player]).emit(
+            types.UPDATE_ROLE,
+            game.getPlayersRole(player)
+          );
+          io.to(playerSocket[player]).emit(
+            types.UPDATE_ROLEDESCRIPTION,
+            game.getPlayersDescription(player)
+          );
+          io.to(playerSocket[player]).emit(
+            types.UPDATE_SELECT_NUM,
+            game.getNightSelectNum(game.getPlayersRole(player))
+          );
         }
     }
     io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
@@ -60,8 +69,16 @@ io.on("connection", socket => {
 
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
-    console.log("Got player action for: " + payload.role + " selected: " + payload.selectedPlayers, " socketID: " + socket.id);
     game.playerNightAction(payload.role, payload.selectedPlayers);
+    let playerSocket = game.getPlayerSockets();
+
+    for (var player in playerSocket) {
+      io.to(playerSocket[player]).emit(
+        types.UPDATE_ROLEDESCRIPTION,
+        game.getPlayersDescription(player)
+      );
+    }
+    io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
   socket.on("disconnect", () => {

@@ -319,8 +319,6 @@ class Game {
   doBaseNightActions() {
     this.playersNight = Object.assign({}, this.players);
     this.centerCardsNight = Object.assign({}, this.centerCards);
-    console.log("******* STARTING NIGHT ACTIONS ***********");
-    this.printAll();
     //If doppleganger were implemented, it would go here
     if (this.exists("Lone Werewolf")) {
       this.messageBack["Lone Werewolf"] = "The center card you discovered is " + this.playerActions["Lone Werewolf"][0] + ": " + this.getPlayersRoleNight(this.playerActions["Lone Werewolf"][0]);
@@ -352,8 +350,8 @@ class Game {
         this.messageBack.Insomniac = "You look at your card at the end of the night and you are now: " + this.getPlayersRoleNight(this.getRolesPlayer("Insomniac"));
       }
     }
-    console.log("******* ENDING NIGHT ACTIONS ***********");
-    this.printAll();
+    // Set gamePhase to Day
+    this.changeGamePhase("Day")
   }
 
   exists(role) {

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Lobby from "./components/lobby";
 import Intro from "./components/intro";
-import Night from "./components/night";
+import Lobby from "./components/lobby";
 import RoleSelect from "./components/roleSelect";
+import Night from "./components/night";
+import Day from "./components/day";
 
 class App extends Component {
   render() {
@@ -18,6 +19,8 @@ class App extends Component {
         return <RoleSelect/>;
       case "Night":
         return <Night />;
+      case "Daytime":
+        return <Day />;
       default:
         return <Intro />;
     }

@@ -11,7 +11,7 @@ import {
   DescriptionDisplay,
   StartButton
 } from "../theme/styles";
-import { performNightAction, majorityNumAdd, majorityNumSub, majorityReset } from "../actions/gameActions";
+import { performNightAction, majorityNumAdd } from "../actions/gameActions";
 
 class Night extends Component {
   constructor() {
