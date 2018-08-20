@@ -90,6 +90,15 @@ class Game {
     return this.majorityNum;
   }
 
+  getMessageBack() {
+    return this.messageBack;
+  }
+
+  clearPlayer() {
+    let playersToSend = this.players.slice();
+    return Object.keys(playersToSend).forEach(player => playersToSend[player] = false)
+  }
+
   // Get the role of a specific player
   getPlayersRole(playerName) {
     if (playerName in this.players) {
@@ -351,7 +360,7 @@ class Game {
       }
     }
     // Set gamePhase to Day
-    this.changeGamePhase("Day")
+    this.changeGamePhase("Daytime")
   }
 
   exists(role) {

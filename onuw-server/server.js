@@ -70,15 +70,25 @@ io.on("connection", socket => {
   // When the performs an action, update the server
   socket.on(types.PLAYER_ACTION, payload => {
     game.playerNightAction(payload.role, payload.selectedPlayers);
-    let playerSocket = game.getPlayerSockets();
 
-    for (var player in playerSocket) {
-      io.to(playerSocket[player]).emit(
-        types.UPDATE_ROLEDESCRIPTION,
-        game.getPlayersDescription(player)
-      );
+    if (game.getGamePhase() === "Daytime") {
+      game.printAll();
+      let playerSocket = game.getPlayerSockets();
+      // Send back dayDescription
+      for (var player in playerSocket) {
+        console.log(player);
+        if (game.getPlayersRole(player) in game.getMessageBack()) {
+          io.to(playerSocket[player]).emit(
+            types.UPDATE_DAYDESCRIPTION,
+            game.getMessageBack(player)[game.getPlayersRole(player)]
+          );
+        } else {
+          io.to(playerSocket[player]).emit(types.UPDATE_DAYDESCRIPTION, null);
+        }
+      }
+      io.sockets.emit(types.UPDATE_PLAYERS, game.clearPlayers());
+      io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
     }
-    io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
   });
 
   socket.on("disconnect", () => {

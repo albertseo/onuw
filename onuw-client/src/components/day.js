@@ -32,6 +32,7 @@ class Day extends Component {
     this.handleConfirm = this.handleConfirm.bind(this);
   }
 
+  // Selecting a player to kill 
   handleSelect(player) {
     let isSelected = this.props.players[player];
     this.props.toggle(player, isSelected);
@@ -43,12 +44,14 @@ class Day extends Component {
     }
   }
 
+  // Sending killSelect to server
   handleConfirm() {
     if (this.state.killSelect !== null) {
       this.setState({
         ...this.state,
         pressed: true
       });
+      // Send to server here
     }
   }
 
