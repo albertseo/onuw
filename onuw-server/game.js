@@ -23,6 +23,7 @@ class Game {
     this.masons = []; // The playesr that are masons in this game
     this.playerActions = {}; // Stores all of the actions players have sent to server
     this.messageBack = {}; // Messages to send back to players
+    this.killSelect = {}; // Totaling KillSelect
   }
 
   // Print the status of the game
@@ -94,9 +95,12 @@ class Game {
     return this.messageBack;
   }
 
-  clearPlayer() {
-    let playersToSend = this.players.slice();
-    return Object.keys(playersToSend).forEach(player => playersToSend[player] = false)
+  clearPlayers() {
+    var playersToSend = Object.assign({}, this.players);
+    for (var player in playersToSend) {
+      playersToSend[player] = false;
+    }
+    return playersToSend;
   }
 
   // Get the role of a specific player
@@ -372,6 +376,19 @@ class Game {
     let temp = this.getPlayersRoleNight(player1)
     this.setPlayerRoleNight(player1, this.getPlayersRoleNight(player2));
     this.setPlayerRoleNight(player2, temp);
+  }
+
+  // Execute the player's action depending on the player
+  killSelectAdd(player, action) {
+    // First logs the action
+    this.killSelect = {
+      ...this.playerActions,
+      [player]: action,
+    };
+    //Check if everyone has submitted an action
+    if (Object.keys(this.playerActions).length === Object.keys(this.players).length) {
+      this.doBaseNightActions();
+    }
   }
 }
 

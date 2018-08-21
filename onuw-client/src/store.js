@@ -8,14 +8,14 @@ import { baseSetRoles } from "./gameConstants";
 // NOTE: some inital states are just set to see page layouts and will be fixed later.
 const initialState = {
   players: {
-    // "Alpha1": false,
-    // "Beta1": false,
-    // "Gamma1": false
+    "Alpha1": false,
+    "Beta1": false,
+    "Gamma1": false
   }, // The current players in the game
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
   userRoleDescription: "You may exchange your card with another player's card, and view your new card", // description of user's role
-  gamePhase: "Intro", // Current state of the game, determines what view to show
+  gamePhase: "Daytime", // Current state of the game, determines what view to show
   centerCards: { // Center cards during the game
     "Alpha": false,
     "Beta": false,
@@ -29,7 +29,7 @@ const initialState = {
   currentRoles: {}, // All of the roles that are in the current game
   numRoleSelected: 0, // Number of roles that need to be selected 
   dayDescription: "Lorem Ipsum", // Description for some roles to be shown during the daytime
-  killSelect: "", // Person selected to kill at the end of the day
+  // killSelect: "", // Person selected to kill at the end of the day
   // isPlayersSelectable: false, // If player cards are selectable
   // isCenterSelectable: true, // True if center cards are selectable
 };

@@ -91,6 +91,14 @@ io.on("connection", socket => {
     }
   });
 
+  socket.on(types.DAY_KILLSELECT_SUBMIT, payload => {
+    game.killSelectAdd(payload.selectedUser, payload.role);
+    
+    if (game.readyForKillReveal) {
+      io.sockets.emit(types.UPDATE_KILLS, game.getKills()); 
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("client disconnected, id: ", socket.id);
   });

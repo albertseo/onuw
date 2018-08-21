@@ -24,6 +24,7 @@ class Day extends Component {
     super();
 
     this.state = {
+      players: {},
       pressed: false,
       killSelect: null
     };
@@ -34,12 +35,23 @@ class Day extends Component {
 
   // Selecting a player to kill 
   handleSelect(player) {
-    let isSelected = this.props.players[player];
-    this.props.toggle(player, isSelected);
+    let isSelected = this.state.players[player];
+    let changedPlayers = Object.assign({}, this.state.players);
+    changedPlayers[player] = !isSelected;
+
     if (!isSelected) {
+      if (this.state.killSelect === null) {
+        this.setState({
+          ...this.state,
+          players: changedPlayers,
+          killSelect: player
+        });
+      }
+    } else {
       this.setState({
         ...this.state,
-        killSelect: player
+        players: changedPlayers,
+        killSelect: null
       });
     }
   }
@@ -53,6 +65,13 @@ class Day extends Component {
       });
       // Send to server here
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      players: this.props.players
+    });
   }
 
   render() {
@@ -76,8 +95,8 @@ class Day extends Component {
           <Title>Players</Title>
           <Line />
           <PlayerCardWrapper>
-            {Object.keys(this.props.players).map(player => {
-              if (!this.props.players[player]) {
+            {Object.keys(this.state.players).map(player => {
+              if (!this.state.players[player]) {
                 return (
                   <PlayerCard
                     key={player}
