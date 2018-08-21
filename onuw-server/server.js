@@ -75,7 +75,6 @@ io.on("connection", socket => {
       let playerSocket = game.getPlayerSockets();
       // Send back dayDescription
       for (var player in playerSocket) {
-        console.log(player);
         if (game.getPlayersRole(player) in game.getMessageBack()) {
           io.to(playerSocket[player]).emit(
             types.UPDATE_DAYDESCRIPTION,
@@ -94,6 +93,8 @@ io.on("connection", socket => {
     game.killSelectAdd(payload.selectedUser, payload.role);
     
     if (game.getGamePhase() === "Finale") {
+      console.log("Finale");
+      io.sockets.emit(types.UPDATE_GAMEPHASE, game.getGamePhase());
       io.sockets.emit(types.UPDATE_KILLS, game.getKilled()); 
     }
   });

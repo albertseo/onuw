@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setPhaseState } from "../actions/gameStateActions";
 import { toggleSelect } from "../actions/playerActions";
+import { sendKillSelect } from "../actions/gameActions";
 
 import Header from "./header";
 import Footer from "./footer";
@@ -63,7 +63,8 @@ class Day extends Component {
         ...this.state,
         pressed: true
       });
-      // Send to server here
+      // Send killSelect to server
+      this.props.killSend(this.state.killSelect, this.props.userRole);
     }
   }
 
@@ -128,13 +129,14 @@ class Day extends Component {
 const mapStateToProps = state => ({
   players: state.players,
   numPlayers: Object.keys(state.players).length,
-  dayDescription: state.dayDescription
+  dayDescription: state.dayDescription,
+  userRole: state.userRole
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    toggle: (playerName, select) => dispatch(toggleSelect(playerName, select))
-    // Something to send killSelect to server here
+    toggle: (playerName, select) => dispatch(toggleSelect(playerName, select)),
+    killSend: (killSelect, player) => dispatch(sendKillSelect(killSelect, player)),
   };
 };
 

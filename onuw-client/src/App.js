@@ -6,6 +6,7 @@ import Lobby from "./components/lobby";
 import RoleSelect from "./components/roleSelect";
 import Night from "./components/night";
 import Day from "./components/day";
+import Finale from "./components/finale";
 
 class App extends Component {
   render() {
@@ -21,6 +22,8 @@ class App extends Component {
         return <Night />;
       case "Daytime":
         return <Day />;
+      case "Finale":
+        return <Finale />;
       default:
         return <Intro />;
     }

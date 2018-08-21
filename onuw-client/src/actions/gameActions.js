@@ -35,6 +35,12 @@ export function performNightAction(role, selectedPlayers) {
   }
 }
 
+export function sendKillSelect(killSelect, player) {
+  return function (dispatch, getState, { emit }) {
+    emit(types.DAY_KILLSELECT_SUBMIT, {selectedUser: killSelect, selectedPlayers: player});
+  }
+}
+
 function majAdd() {
   return {
     type: types.MAJORITY_ADD,

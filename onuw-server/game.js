@@ -56,6 +56,10 @@ class Game {
     console.log(this.playerActions);
     console.log("Message Back");
     console.log(this.messageBack);
+    console.log("KillSelect");
+    console.log(this.killSelect);
+    console.log("killActions");
+    console.log(this.killActions);
     console.log("===============================");
   }
 
@@ -346,7 +350,6 @@ class Game {
     if (this.exists("Seer")) {
       let messageIntro = "The card you see is "
       this.playerActions.Seer.forEach(card => {
-        console.log(card);
         messageIntro += card + ": " + this.getPlayersRoleNight(card) + " ";
       });
       this.messageBack.Seer = messageIntro;
@@ -393,11 +396,10 @@ class Game {
     // Process KillSelect
     if (user !== "Hunter") {
       if (selectedPlayer in this.killSelect) {
-        this.killSelect = {
-          ...this.killSelect,
-          [selectedPlayer]: this.killSelect[selectedPlayer]++,
-        };
+        console.log("adding to existing");
+        this.killSelect[selectedPlayer]++;
       } else {
+        console.log("adding new");
         this.killSelect = {
           ...this.killSelect,
           [selectedPlayer]: 1
@@ -433,6 +435,7 @@ class Game {
     } else {
       this.killed = {vote: killed};
     }
+    console.log(this.killed);
   }
 }
 
