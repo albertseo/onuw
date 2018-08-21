@@ -24,6 +24,9 @@ class Game {
     this.playerActions = {}; // Stores all of the actions players have sent to server
     this.messageBack = {}; // Messages to send back to players
     this.killSelect = {}; // Totaling KillSelect
+    this.guaranteeKill = null; // Guarantee kill for hunter
+    this.killActions = []; // Logs the kills
+    this.killed // List of people killed
   }
 
   // Print the status of the game
@@ -93,6 +96,10 @@ class Game {
 
   getMessageBack() {
     return this.messageBack;
+  }
+
+  getKilled() {
+    return this.killed;
   }
 
   clearPlayers() {
@@ -378,16 +385,53 @@ class Game {
     this.setPlayerRoleNight(player2, temp);
   }
 
-  // Execute the player's action depending on the player
-  killSelectAdd(player, action) {
+  // Select kills processing
+  killSelectAdd(selectedPlayer, user) {
     // First logs the action
-    this.killSelect = {
-      ...this.playerActions,
-      [player]: action,
-    };
+    this.killActions.push(selectedPlayer);
+    
+    // Process KillSelect
+    if (user !== "Hunter") {
+      if (selectedPlayer in this.killSelect) {
+        this.killSelect = {
+          ...this.killSelect,
+          [selectedPlayer]: this.killSelect[selectedPlayer]++,
+        };
+      } else {
+        this.killSelect = {
+          ...this.killSelect,
+          [selectedPlayer]: 1
+        };
+      }
+    } else {
+      this.guaranteeKill = selectedPlayer;
+    }
+
     //Check if everyone has submitted an action
-    if (Object.keys(this.playerActions).length === Object.keys(this.players).length) {
-      this.doBaseNightActions();
+    if (Object.keys(this.killActions).length === Object.keys(this.players).length) {
+      this.processKills();
+    }
+  }
+
+  // Process Kills, find the top kills
+  processKills() {
+    let killed = [];
+    let killedNum = 0;
+    for (var player in this.killSelect) {
+      if (this.killSelect[player] > killedNum) {
+        killed = [player];
+        killedNum = this.killSelect[player];
+      } else if (this.killSelect[player] === killedNum) {
+        killed.push(player);
+      }
+    }
+
+    this.changeGamePhase("Finale")
+    
+    if (this.guaranteeKill !== null) {
+      this.killed = {vote: killed, hunter: this.guaranteeKill};
+    } else {
+      this.killed = {vote: killed};
     }
   }
 }

@@ -24,6 +24,9 @@ export const NIGHT_PLAYER_SUB = "NIGHT_PLAYER_SUB";
 export const NIGHT_PLAYER_SET = "NIGHT_PLAYER_SUB";
 export const NIGHT_PLAYER_RESET = "NIGHT_PLAYER_RESET";
 
+// For day actions
+export const DAY_KILLSELECT_SUBMIT = "DAY_KILLSELECT_SUBMIT";
+
 // Actions that will dispatch from server:
 export const UPDATE_PLAYERS = "UPDATE_PLAYERS";
 export const UPDATE_GAMEPHASE = "UPDATE_GAMEPHASE";

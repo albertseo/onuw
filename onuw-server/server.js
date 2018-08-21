@@ -72,7 +72,6 @@ io.on("connection", socket => {
     game.playerNightAction(payload.role, payload.selectedPlayers);
 
     if (game.getGamePhase() === "Daytime") {
-      game.printAll();
       let playerSocket = game.getPlayerSockets();
       // Send back dayDescription
       for (var player in playerSocket) {
@@ -94,8 +93,8 @@ io.on("connection", socket => {
   socket.on(types.DAY_KILLSELECT_SUBMIT, payload => {
     game.killSelectAdd(payload.selectedUser, payload.role);
     
-    if (game.readyForKillReveal) {
-      io.sockets.emit(types.UPDATE_KILLS, game.getKills()); 
+    if (game.getGamePhase() === "Finale") {
+      io.sockets.emit(types.UPDATE_KILLS, game.getKilled()); 
     }
   });
 
