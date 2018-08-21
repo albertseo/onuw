@@ -1,9 +1,15 @@
 # One Night Ultimate Werewolf Online
 
 This is a web port of the board game [One Night Ultimate Werewolf](https://beziergames.com/products/one-night-ultimate-werewolf) by Bezier Games.
-Play together with friends anywhere, anytime!
+
+Design and inspiration drawn from mpcovcd's online version of [Spyfall](https://github.com/mpcovcd/spyfall)
 
 **This is still a work in progress**
+
+# Disclaimer
+
+One Night Ultimate Werewolf is a board game designed by desinged by Ted Alspach and Akisha Okui, and published by  
+[Bezier Games](https://beziergames.com/). This is an unofficial fan project written as a fun learning project, and is not endorsed by the designer nor publisher.
 
 # Built with React and socket.io
 The code is split in two locations for the server and the client. Server code is located at `/onuw-server`, while client code is located at `/onuw-client`.
@@ -35,3 +41,6 @@ There are many additional features I would like to add in the future.
 - [ ] Host server and client to make it fully accessible
 - [ ] Use socket.io rooms and namespaces to allow for multiple games to be played at the same time
 - [ ] Refractor code for Doppleganger role to be playable
+
+# License
+MIT © [Albert Seo](https://github.com/albertseo)
