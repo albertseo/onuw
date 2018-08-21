@@ -14,7 +14,7 @@ const initialState = {
   }, // The current players in the game
   username: "temp", // The user's name
   userRole: "temp", // The user's assigned role
-  userRoleDescription: "You may exchange your card with another player's card, and view your new card", // description of user's role
+  userRoleDescription: "temp", // description of user's role
   gamePhase: "Intro", // Current state of the game, determines what view to show
   centerCards: { // Center cards during the game
     "Alpha": false,
